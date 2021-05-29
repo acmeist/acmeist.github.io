@@ -3,11 +3,11 @@
   <title>AiKIKI</title>
   
   <subtitle>Welcome!</subtitle>
-  <link href="https://www.aikiki.top/hexo/atom.xml" rel="self"/>
+  <link href="https://www.aikiki.top/atom.xml" rel="self"/>
   
-  <link href="https://www.aikiki.top/hexo/"/>
+  <link href="https://www.aikiki.top/"/>
   <updated>2021-05-29T06:06:51.634Z</updated>
-  <id>https://www.aikiki.top/hexo/</id>
+  <id>https://www.aikiki.top/</id>
   
   <author>
     <name>樵子</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>CentOS 8 安装 Docker-CE</title>
-    <link href="https://www.aikiki.top/hexo/post/ea01/"/>
-    <id>https://www.aikiki.top/hexo/post/ea01/</id>
+    <link href="https://www.aikiki.top/post/ea01/"/>
+    <id>https://www.aikiki.top/post/ea01/</id>
     <published>2021-03-22T18:24:00.000Z</published>
     <updated>2021-05-29T06:06:51.634Z</updated>
     
@@ -34,19 +34,19 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="CentOS" scheme="https://www.aikiki.top/hexo/tags/CentOS/"/>
+    <category term="CentOS" scheme="https://www.aikiki.top/tags/CentOS/"/>
     
-    <category term="Docker" scheme="https://www.aikiki.top/hexo/tags/Docker/"/>
+    <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>Proxmox VE 6.2 国内源设置</title>
-    <link href="https://www.aikiki.top/hexo/post/862b/"/>
-    <id>https://www.aikiki.top/hexo/post/862b/</id>
+    <link href="https://www.aikiki.top/post/862b/"/>
+    <id>https://www.aikiki.top/post/862b/</id>
     <published>2020-06-01T08:18:00.000Z</published>
     <updated>2021-05-29T06:06:51.646Z</updated>
     
@@ -60,17 +60,17 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Proxmox VE" scheme="https://www.aikiki.top/hexo/tags/Proxmox-VE/"/>
+    <category term="Proxmox VE" scheme="https://www.aikiki.top/tags/Proxmox-VE/"/>
     
   </entry>
   
   <entry>
     <title>使用 Windows 自带的远程桌面 mstsc 连接 CentOS 8</title>
-    <link href="https://www.aikiki.top/hexo/post/def6/"/>
-    <id>https://www.aikiki.top/hexo/post/def6/</id>
+    <link href="https://www.aikiki.top/post/def6/"/>
+    <id>https://www.aikiki.top/post/def6/</id>
     <published>2020-05-09T01:43:00.000Z</published>
     <updated>2021-05-29T06:06:51.655Z</updated>
     
@@ -88,17 +88,17 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="CentOS" scheme="https://www.aikiki.top/hexo/tags/CentOS/"/>
+    <category term="CentOS" scheme="https://www.aikiki.top/tags/CentOS/"/>
     
   </entry>
   
   <entry>
     <title>给 Docker 中的 PHP 安装 GD 扩展</title>
-    <link href="https://www.aikiki.top/hexo/post/f10f/"/>
-    <id>https://www.aikiki.top/hexo/post/f10f/</id>
+    <link href="https://www.aikiki.top/post/f10f/"/>
+    <id>https://www.aikiki.top/post/f10f/</id>
     <published>2020-03-25T05:28:00.000Z</published>
     <updated>2021-05-29T06:06:51.657Z</updated>
     
@@ -113,19 +113,19 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="PHP" scheme="https://www.aikiki.top/hexo/tags/PHP/"/>
+    <category term="PHP" scheme="https://www.aikiki.top/tags/PHP/"/>
     
-    <category term="Docker" scheme="https://www.aikiki.top/hexo/tags/Docker/"/>
+    <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>Docker 搭建 DNMP 环境</title>
-    <link href="https://www.aikiki.top/hexo/post/6f9d/"/>
-    <id>https://www.aikiki.top/hexo/post/6f9d/</id>
+    <link href="https://www.aikiki.top/post/6f9d/"/>
+    <id>https://www.aikiki.top/post/6f9d/</id>
     <published>2020-03-22T08:13:00.000Z</published>
     <updated>2021-05-29T06:06:51.641Z</updated>
     
@@ -140,25 +140,25 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="MariaDB" scheme="https://www.aikiki.top/hexo/tags/MariaDB/"/>
+    <category term="MariaDB" scheme="https://www.aikiki.top/tags/MariaDB/"/>
     
-    <category term="PHP" scheme="https://www.aikiki.top/hexo/tags/PHP/"/>
+    <category term="PHP" scheme="https://www.aikiki.top/tags/PHP/"/>
     
-    <category term="phpMyAdmin" scheme="https://www.aikiki.top/hexo/tags/phpMyAdmin/"/>
+    <category term="phpMyAdmin" scheme="https://www.aikiki.top/tags/phpMyAdmin/"/>
     
-    <category term="Nginx" scheme="https://www.aikiki.top/hexo/tags/Nginx/"/>
+    <category term="Nginx" scheme="https://www.aikiki.top/tags/Nginx/"/>
     
-    <category term="Docker" scheme="https://www.aikiki.top/hexo/tags/Docker/"/>
+    <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>Debian 10 安装 Docker-CE</title>
-    <link href="https://www.aikiki.top/hexo/post/fed3/"/>
-    <id>https://www.aikiki.top/hexo/post/fed3/</id>
+    <link href="https://www.aikiki.top/post/fed3/"/>
+    <id>https://www.aikiki.top/post/fed3/</id>
     <published>2020-03-22T06:13:00.000Z</published>
     <updated>2021-05-29T06:06:51.639Z</updated>
     
@@ -173,19 +173,19 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Docker" scheme="https://www.aikiki.top/hexo/tags/Docker/"/>
+    <category term="Debian" scheme="https://www.aikiki.top/tags/Debian/"/>
     
-    <category term="Debian" scheme="https://www.aikiki.top/hexo/tags/Debian/"/>
+    <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>使用 Windows 自带的远程桌面 mstsc 连接 Debian 10</title>
-    <link href="https://www.aikiki.top/hexo/post/1554/"/>
-    <id>https://www.aikiki.top/hexo/post/1554/</id>
+    <link href="https://www.aikiki.top/post/1554/"/>
+    <id>https://www.aikiki.top/post/1554/</id>
     <published>2020-03-19T18:01:52.000Z</published>
     <updated>2021-05-29T06:06:51.654Z</updated>
     
@@ -199,17 +199,17 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Debian" scheme="https://www.aikiki.top/hexo/tags/Debian/"/>
+    <category term="Debian" scheme="https://www.aikiki.top/tags/Debian/"/>
     
   </entry>
   
   <entry>
     <title>Debian 10 解决 /etc/rc.local 开机启动问题</title>
-    <link href="https://www.aikiki.top/hexo/post/7ae0/"/>
-    <id>https://www.aikiki.top/hexo/post/7ae0/</id>
+    <link href="https://www.aikiki.top/post/7ae0/"/>
+    <id>https://www.aikiki.top/post/7ae0/</id>
     <published>2020-03-16T18:07:00.000Z</published>
     <updated>2021-05-29T06:06:51.643Z</updated>
     
@@ -223,17 +223,17 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Debian" scheme="https://www.aikiki.top/hexo/tags/Debian/"/>
+    <category term="Debian" scheme="https://www.aikiki.top/tags/Debian/"/>
     
   </entry>
   
   <entry>
     <title>Debian 10 搭建 nfs 服务器</title>
-    <link href="https://www.aikiki.top/hexo/post/9480/"/>
-    <id>https://www.aikiki.top/hexo/post/9480/</id>
+    <link href="https://www.aikiki.top/post/9480/"/>
+    <id>https://www.aikiki.top/post/9480/</id>
     <published>2020-03-16T18:06:53.000Z</published>
     <updated>2021-05-29T06:06:51.640Z</updated>
     
@@ -247,17 +247,17 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Debian" scheme="https://www.aikiki.top/hexo/tags/Debian/"/>
+    <category term="Debian" scheme="https://www.aikiki.top/tags/Debian/"/>
     
   </entry>
   
   <entry>
     <title>Proxmox VE 安装群晖 6.2</title>
-    <link href="https://www.aikiki.top/hexo/post/c6aa/"/>
-    <id>https://www.aikiki.top/hexo/post/c6aa/</id>
+    <link href="https://www.aikiki.top/post/c6aa/"/>
+    <id>https://www.aikiki.top/post/c6aa/</id>
     <published>2020-03-14T22:01:00.000Z</published>
     <updated>2021-05-29T06:06:51.647Z</updated>
     
@@ -271,19 +271,19 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Proxmox VE" scheme="https://www.aikiki.top/hexo/tags/Proxmox-VE/"/>
+    <category term="Proxmox VE" scheme="https://www.aikiki.top/tags/Proxmox-VE/"/>
     
-    <category term="Synology" scheme="https://www.aikiki.top/hexo/tags/Synology/"/>
+    <category term="Synology" scheme="https://www.aikiki.top/tags/Synology/"/>
     
   </entry>
   
   <entry>
     <title>Linux 系统让命令行提示符显示完整路径</title>
-    <link href="https://www.aikiki.top/hexo/post/fbba/"/>
-    <id>https://www.aikiki.top/hexo/post/fbba/</id>
+    <link href="https://www.aikiki.top/post/fbba/"/>
+    <id>https://www.aikiki.top/post/fbba/</id>
     <published>2020-03-14T04:05:00.000Z</published>
     <updated>2021-05-29T06:06:51.644Z</updated>
     
@@ -298,17 +298,17 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Linux" scheme="https://www.aikiki.top/hexo/tags/Linux/"/>
+    <category term="Linux" scheme="https://www.aikiki.top/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>Debian 10（buster） 更换国内软件源</title>
-    <link href="https://www.aikiki.top/hexo/post/2b35/"/>
-    <id>https://www.aikiki.top/hexo/post/2b35/</id>
+    <link href="https://www.aikiki.top/post/2b35/"/>
+    <id>https://www.aikiki.top/post/2b35/</id>
     <published>2020-03-13T23:25:00.000Z</published>
     <updated>2021-05-29T06:06:51.637Z</updated>
     
@@ -323,17 +323,17 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Debian" scheme="https://www.aikiki.top/hexo/tags/Debian/"/>
+    <category term="Debian" scheme="https://www.aikiki.top/tags/Debian/"/>
     
   </entry>
   
   <entry>
     <title>CentOS 7 清理开机启动项</title>
-    <link href="https://www.aikiki.top/hexo/post/a3e5/"/>
-    <id>https://www.aikiki.top/hexo/post/a3e5/</id>
+    <link href="https://www.aikiki.top/post/a3e5/"/>
+    <id>https://www.aikiki.top/post/a3e5/</id>
     <published>2020-03-13T22:44:00.000Z</published>
     <updated>2021-05-29T06:06:51.635Z</updated>
     
@@ -348,17 +348,17 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="CentOS" scheme="https://www.aikiki.top/hexo/tags/CentOS/"/>
+    <category term="CentOS" scheme="https://www.aikiki.top/tags/CentOS/"/>
     
   </entry>
   
   <entry>
     <title>六句命令解决 Proxmox VE 更新慢的问题</title>
-    <link href="https://www.aikiki.top/hexo/post/345d/"/>
-    <id>https://www.aikiki.top/hexo/post/345d/</id>
+    <link href="https://www.aikiki.top/post/345d/"/>
+    <id>https://www.aikiki.top/post/345d/</id>
     <published>2020-03-13T04:17:00.000Z</published>
     <updated>2021-05-29T06:06:51.653Z</updated>
     
@@ -372,17 +372,17 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Proxmox VE" scheme="https://www.aikiki.top/hexo/tags/Proxmox-VE/"/>
+    <category term="Proxmox VE" scheme="https://www.aikiki.top/tags/Proxmox-VE/"/>
     
   </entry>
   
   <entry>
     <title>使用 Windows 自带的远程桌面 mstsc 连接 CentOS 7</title>
-    <link href="https://www.aikiki.top/hexo/post/dab6/"/>
-    <id>https://www.aikiki.top/hexo/post/dab6/</id>
+    <link href="https://www.aikiki.top/post/dab6/"/>
+    <id>https://www.aikiki.top/post/dab6/</id>
     <published>2019-06-19T22:12:00.000Z</published>
     <updated>2021-05-29T06:06:51.651Z</updated>
     
@@ -397,17 +397,17 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="CentOS" scheme="https://www.aikiki.top/hexo/tags/CentOS/"/>
+    <category term="CentOS" scheme="https://www.aikiki.top/tags/CentOS/"/>
     
   </entry>
   
   <entry>
     <title>谷歌云 Compute Engine 安装 CentOS 7 总结</title>
-    <link href="https://www.aikiki.top/hexo/post/1952/"/>
-    <id>https://www.aikiki.top/hexo/post/1952/</id>
+    <link href="https://www.aikiki.top/post/1952/"/>
+    <id>https://www.aikiki.top/post/1952/</id>
     <published>2019-05-27T16:40:00.000Z</published>
     <updated>2021-05-29T06:06:51.658Z</updated>
     
@@ -422,21 +422,21 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="CentOS" scheme="https://www.aikiki.top/hexo/tags/CentOS/"/>
+    <category term="CentOS" scheme="https://www.aikiki.top/tags/CentOS/"/>
     
-    <category term="Google Cloud" scheme="https://www.aikiki.top/hexo/tags/Google-Cloud/"/>
+    <category term="Google Cloud" scheme="https://www.aikiki.top/tags/Google-Cloud/"/>
     
-    <category term="Compute Engine" scheme="https://www.aikiki.top/hexo/tags/Compute-Engine/"/>
+    <category term="Compute Engine" scheme="https://www.aikiki.top/tags/Compute-Engine/"/>
     
   </entry>
   
   <entry>
     <title>CentOS 7 搭建 LNMP 环境</title>
-    <link href="https://www.aikiki.top/hexo/post/52e3/"/>
-    <id>https://www.aikiki.top/hexo/post/52e3/</id>
+    <link href="https://www.aikiki.top/post/52e3/"/>
+    <id>https://www.aikiki.top/post/52e3/</id>
     <published>2019-05-25T22:39:00.000Z</published>
     <updated>2021-05-29T06:06:51.629Z</updated>
     
@@ -450,25 +450,25 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="CentOS" scheme="https://www.aikiki.top/hexo/tags/CentOS/"/>
+    <category term="CentOS" scheme="https://www.aikiki.top/tags/CentOS/"/>
     
-    <category term="MariaDB" scheme="https://www.aikiki.top/hexo/tags/MariaDB/"/>
+    <category term="MariaDB" scheme="https://www.aikiki.top/tags/MariaDB/"/>
     
-    <category term="PHP" scheme="https://www.aikiki.top/hexo/tags/PHP/"/>
+    <category term="PHP" scheme="https://www.aikiki.top/tags/PHP/"/>
     
-    <category term="phpMyAdmin" scheme="https://www.aikiki.top/hexo/tags/phpMyAdmin/"/>
+    <category term="phpMyAdmin" scheme="https://www.aikiki.top/tags/phpMyAdmin/"/>
     
-    <category term="Nginx" scheme="https://www.aikiki.top/hexo/tags/Nginx/"/>
+    <category term="Nginx" scheme="https://www.aikiki.top/tags/Nginx/"/>
     
   </entry>
   
   <entry>
     <title>CentOS 7 搭建 LAMP 环境安装 WordPress</title>
-    <link href="https://www.aikiki.top/hexo/post/e4e5/"/>
-    <id>https://www.aikiki.top/hexo/post/e4e5/</id>
+    <link href="https://www.aikiki.top/post/e4e5/"/>
+    <id>https://www.aikiki.top/post/e4e5/</id>
     <published>2019-05-09T18:24:00.000Z</published>
     <updated>2021-05-29T06:06:51.631Z</updated>
     
@@ -482,27 +482,27 @@
     
     
     
-    <category term="Archives" scheme="https://www.aikiki.top/hexo/categories/Archives/"/>
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="CentOS" scheme="https://www.aikiki.top/hexo/tags/CentOS/"/>
+    <category term="CentOS" scheme="https://www.aikiki.top/tags/CentOS/"/>
     
-    <category term="MariaDB" scheme="https://www.aikiki.top/hexo/tags/MariaDB/"/>
+    <category term="WordPress" scheme="https://www.aikiki.top/tags/WordPress/"/>
     
-    <category term="PHP" scheme="https://www.aikiki.top/hexo/tags/PHP/"/>
+    <category term="Apache" scheme="https://www.aikiki.top/tags/Apache/"/>
     
-    <category term="phpMyAdmin" scheme="https://www.aikiki.top/hexo/tags/phpMyAdmin/"/>
+    <category term="MariaDB" scheme="https://www.aikiki.top/tags/MariaDB/"/>
     
-    <category term="WordPress" scheme="https://www.aikiki.top/hexo/tags/WordPress/"/>
+    <category term="PHP" scheme="https://www.aikiki.top/tags/PHP/"/>
     
-    <category term="Apache" scheme="https://www.aikiki.top/hexo/tags/Apache/"/>
+    <category term="phpMyAdmin" scheme="https://www.aikiki.top/tags/phpMyAdmin/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://www.aikiki.top/hexo/post/3eeb/"/>
-    <id>https://www.aikiki.top/hexo/post/3eeb/</id>
+    <link href="https://www.aikiki.top/post/3eeb/"/>
+    <id>https://www.aikiki.top/post/3eeb/</id>
     <published>2019-05-09T18:24:00.000Z</published>
     <updated>2021-05-29T06:06:51.649Z</updated>
     
