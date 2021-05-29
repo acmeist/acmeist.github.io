@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CentOS 7 搭建 LAMP 环境安装 WordPress - AiKIKI</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Aikiki,"> 
+    <meta name="description" content="Always CREATIVE.,安装 Apache web 服务器安装 Apache web 服务器1yum install -y httpd 
+
+配置 Apache 服务器WordPress 使用了 Url 重写技术，需要在 A,"> 
+    <meta name="author" content="樵子"> 
+    <link rel="alternative" href="atom.xml" title="AiKIKI" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?79e34085f0df88377b60532620bf43f0";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">AiKIKI</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://hexo.aikiki.top"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">CentOS 7 搭建 LAMP 环境安装 WordPress</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">CentOS 7 搭建 LAMP 环境安装 WordPress</h1>
+        <div class="stuff">
+            <span>五月 10, 2019</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/MariaDB/" rel="tag">MariaDB</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/WordPress/" rel="tag">WordPress</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/phpMyAdmin/" rel="tag">phpMyAdmin</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="安装-Apache-web-服务器"><a href="#安装-Apache-web-服务器" class="headerlink" title="安装 Apache web 服务器"></a>安装 Apache web 服务器</h1><h2 id="安装-Apache-web-服务器-1"><a href="#安装-Apache-web-服务器-1" class="headerlink" title="安装 Apache web 服务器"></a>安装 Apache web 服务器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y httpd </span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-Apache-服务器"><a href="#配置-Apache-服务器" class="headerlink" title="配置 Apache 服务器"></a>配置 Apache 服务器</h2><p>WordPress 使用了 Url 重写技术，需要在 Apache 中开启。<br>Apache 使用 mod_rewrite 模块来实现 Url 重写，需要在 Apache 的配置文件中打开。<br>修改 Apache 配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/httpd/conf/httpd.conf</span><br></pre></td></tr></table></figure>
+<p>搜索  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># LoadModule rewrite_module modules/mod_rewrite.so</span></span><br></pre></td></tr></table></figure>
+<p>将前面的<code>#</code>号去掉，如果没有加上该行即可。</p>
+<p>搜索  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">AllowOverride</span> <span class="string">None</span></span><br></pre></td></tr></table></figure>
+<p>替换为</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">AllowOverride</span> <span class="string">All</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="启动-Apache-服务器并设置为开机启动"><a href="#启动-Apache-服务器并设置为开机启动" class="headerlink" title="启动 Apache 服务器并设置为开机启动"></a>启动 Apache 服务器并设置为开机启动</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start httpd</span><br><span class="line">systemctl <span class="built_in">enable</span> httpd</span><br></pre></td></tr></table></figure>
+
+<h2 id="Apache-服务器测试"><a href="#Apache-服务器测试" class="headerlink" title="Apache 服务器测试"></a>Apache 服务器测试</h2><p>使用浏览器打开 <a target="_blank" rel="noopener" href="http://127.0.0.1/">http://127.0.0.1/</a> 检查 Apache 安装是否成功。 成功后，浏览器显示如下：</p>
+<p><a target="_blank" rel="noopener" href="https://img.aikiki.top/image/TsD"><img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/post/img/1041711867.png" alt="1041711867.png"></a></p>
+<h1 id="安装-MariaDB-数据库"><a href="#安装-MariaDB-数据库" class="headerlink" title="安装 MariaDB 数据库"></a>安装 MariaDB 数据库</h1><p>MariaDB 数据库管理系统是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。MariaDB 的目的是完全兼容 MySQL，包括API和命令行，使之能轻松成为 MySQL 的代替品。使用这个分支的原因是：甲骨文公司收购了MySQL后，有将 MySQL 闭源的潜在风险，因此社区采用分支的方式来避开这个风险。 目前众多大型互联网用户以及 Linux 发行商纷纷抛弃 MySQL，转投 MariaDB 阵营。MariaDB 是目前最受关注的 MySQL 数据库衍生版，也被视为开源数据库 MySQL 的替代品。MariaDB 虽然被视为 MySQL 数据库的替代品，但它在扩展功能、存储引擎以及一些新的功能改进方面都强过 MySQL。  </p>
+<h2 id="安装-MariaDB-数据库-1"><a href="#安装-MariaDB-数据库-1" class="headerlink" title="安装 MariaDB 数据库"></a>安装 MariaDB 数据库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mariadb-server mariadb</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动-MariaDB-数据库并设置为开机启动"><a href="#启动-MariaDB-数据库并设置为开机启动" class="headerlink" title="启动 MariaDB 数据库并设置为开机启动"></a>启动 MariaDB 数据库并设置为开机启动</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mariadb</span><br><span class="line">systemctl <span class="built_in">enable</span> mariadb</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装数据库安全脚本"><a href="#安装数据库安全脚本" class="headerlink" title="安装数据库安全脚本"></a>安装数据库安全脚本</h2><p>安装数据库安全脚本，去掉危险默认设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure>
+<p>按提示输入数据库 root 账户的密码，如果是新安装侧输入空格后设置 root 账户的新密码。<br><img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/post/img/2488139859.png" alt="2488139859.png"></p>
+<p>输入空格后设置 root 账户密码。<br><img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/post/img/3639214174.png" alt="3639214174.png"></p>
+<p>接下来的安装一路回车即可。<br><a target="_blank" rel="noopener" href="https://img.aikiki.top/image/duc"><img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/post/img/7522703.png" alt="7522703.png"></a></p>
+<h1 id="安装-PHP5-6"><a href="#安装-PHP5-6" class="headerlink" title="安装 PHP5.6"></a>安装 PHP5.6</h1><p>WordPress 官方网站发布的最新版本是 5.2，要求 PHP 最低版本为 5.6。而 CentOS 7 默认源是 5.4 版，因此需要配置 yum 源来安装 5.6 版。</p>
+<h2 id="查询软件包"><a href="#查询软件包" class="headerlink" title="查询软件包"></a>查询软件包</h2><p>默认情况下 CentOS 自带的只有 5.4 版本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum provides php</span><br></pre></td></tr></table></figure>
+
+<h2 id="移除系统已经安装的-PHP"><a href="#移除系统已经安装的-PHP" class="headerlink" title="移除系统已经安装的 PHP"></a>移除系统已经安装的 PHP</h2><p>如果系统已经安装其它版本的 PHP，先移除系统的自带版本。 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove php-common -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-CentOS-7-高版本-PHP-的源"><a href="#配置-CentOS-7-高版本-PHP-的源" class="headerlink" title="配置 CentOS 7 高版本 PHP 的源"></a>配置 CentOS 7 高版本 PHP 的源</h2><p>高版本的 PHP 源需要手动配置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/epel-release.rpm</span><br><span class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</span><br></pre></td></tr></table></figure>
+<p>查看可安装包<br>使用 yum list 命令查看可安装的包(Packege)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list --enablerepo=remi --enablerepo=remi-php56 | grep php</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装-PHP-5-6"><a href="#安装-PHP-5-6" class="headerlink" title="安装 PHP 5.6"></a>安装 PHP 5.6</h2><p>yum 源配置好之后，就可以安装 PHP 5.6。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release</span><br><span class="line">yum install -y php56w php56w-opcache php56w-xml php56w-mcrypt php56w-gd php56w-devel php56w-mysql php56w-intl php56w-mbstring</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如需安装 php-fpm（例如：FastCGI） 按以下步骤执行，这里会提示多个安装源，选择5.6版本即可。</span></span><br><span class="line">yum provides php-fpm</span><br><span class="line">yum install php56w-fpm-5.6.31-1.w7.x86_64 -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看-PHP-安装版本"><a href="#查看-PHP-安装版本" class="headerlink" title="查看 PHP 安装版本"></a>查看 PHP 安装版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -v</span><br></pre></td></tr></table></figure>
+<p>![PHP-Version.png][5]</p>
+<h2 id="重启-Apache-服务器"><a href="#重启-Apache-服务器" class="headerlink" title="重启 Apache 服务器"></a>重启 Apache 服务器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart httpd</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建-PHP-测试页面"><a href="#创建-PHP-测试页面" class="headerlink" title="创建 PHP 测试页面"></a>创建 PHP 测试页面</h2><p>在网站目录（默认目录为：/var/www/html） 新建 info.php 文件测试 PHP： </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /var/www/html/info.php</span><br></pre></td></tr></table></figure>
+<p>输入如下内容：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> phpinfo();<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="测试-Apache-服务器-PHP"><a href="#测试-Apache-服务器-PHP" class="headerlink" title="测试 Apache 服务器 PHP"></a>测试 Apache 服务器 PHP</h2><p>用浏览器打开 <a target="_blank" rel="noopener" href="http://127.0.0.1/info.php">http://127.0.0.1/info.php</a>  显示内容如下：<br><a target="_blank" rel="noopener" href="https://img.aikiki.top/image/M27"><img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/post/img/3933973293.png" alt="3933973293.png"></a></p>
+<h2 id="附：配置-Apache-以-FastCGI-运行-PHP"><a href="#附：配置-Apache-以-FastCGI-运行-PHP" class="headerlink" title="附：配置 Apache 以 FastCGI 运行 PHP"></a>附：配置 Apache 以 FastCGI 运行 PHP</h2><p>Apache 默认是用自带的 mod_php 模块运行 PHP，我们可以使用 FastCGI 来执行 PHP 脚本。<br>编辑 Apache 配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/httpd/conf/httpd.conf</span><br></pre></td></tr></table></figure>
+<p>按以下说明修改：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 增加 php-fpm 相关支持模块</span></span><br><span class="line"><span class="string">LoadModule</span> <span class="string">proxy_module</span> <span class="string">modules/mod_proxy.so</span></span><br><span class="line"><span class="string">LoadModule</span> <span class="string">proxy_fcgi_module</span> <span class="string">modules/mod_proxy_fcgi.so</span></span><br><span class="line"><span class="comment"># 增加 index.php 默认页</span></span><br><span class="line"><span class="string">&lt;IfModule</span> <span class="string">dir_module&gt;</span></span><br><span class="line">    <span class="string">DirectoryIndex</span> <span class="string">index.html</span> <span class="string">index.php</span></span><br><span class="line"><span class="string">&lt;/IfModule&gt;</span></span><br><span class="line"><span class="comment"># 增加 PHP 解析类型</span></span><br><span class="line"><span class="string">AddType</span> <span class="string">application/x-httpd-php</span> <span class="string">.php</span></span><br><span class="line"><span class="string">AddType</span> <span class="string">application/x-httpd-php-source</span> <span class="string">.php</span></span><br><span class="line"><span class="comment"># 增加 php-fpm </span></span><br><span class="line"><span class="string">&lt;FilesMatch</span> <span class="string">\.php$&gt;</span></span><br><span class="line">    <span class="string">SetHandler</span> <span class="string">&quot;proxy:fcgi://127.0.0.1:9000&quot;</span></span><br><span class="line"><span class="string">&lt;/FilesMatch&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="安装-phpMyAdmin"><a href="#安装-phpMyAdmin" class="headerlink" title="安装 phpMyAdmin"></a>安装 phpMyAdmin</h1><p>phpMyAdmin 是一个 MariaDB 数据的 Web 管理系统。</p>
+<h2 id="安装-phpMyAdmin-1"><a href="#安装-phpMyAdmin-1" class="headerlink" title="安装 phpMyAdmin"></a>安装 phpMyAdmin</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 EPEL库，如果之前已经安装可以跳过此步。</span></span><br><span class="line">yum install -y epel-release</span><br><span class="line"><span class="comment"># 安装 phpMyAdmin。</span></span><br><span class="line">yum install -y phpmyadmin</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-phpMyAdmin-的-httpd"><a href="#配置-phpMyAdmin-的-httpd" class="headerlink" title="配置 phpMyAdmin 的 httpd"></a>配置 phpMyAdmin 的 httpd</h2><p>配置文件为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/httpd/conf.d/phpMyAdmin.conf</span><br></pre></td></tr></table></figure>
+<p>按图中所示修改配置文件：<br><img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/post/img/209675648.png" alt="209675648.png"></p>
+<h2 id="重启-Apache-服务器-1"><a href="#重启-Apache-服务器-1" class="headerlink" title="重启 Apache 服务器"></a>重启 Apache 服务器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart httpd</span><br></pre></td></tr></table></figure>
+
+<h2 id="访问-phpMyAdmin"><a href="#访问-phpMyAdmin" class="headerlink" title="访问 phpMyAdmin"></a>访问 phpMyAdmin</h2><p>在浏览器输入 <a target="_blank" rel="noopener" href="http://127.0.0.1/phpMyAdmin">http://127.0.0.1/phpMyAdmin</a> 登录 phpMyAdmin：<br><a target="_blank" rel="noopener" href="https://img.aikiki.top/image/AHg"><img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/post/img/3644091757.png" alt="3644091757.png"></a></p>
+<h1 id="安装-WordPress"><a href="#安装-WordPress" class="headerlink" title="安装 WordPress"></a>安装 WordPress</h1><h2 id="创建-WordPress-数据库"><a href="#创建-WordPress-数据库" class="headerlink" title="创建 WordPress 数据库"></a>创建 WordPress 数据库</h2><p>登录 MariaDB</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+<p>创建 wordpress 数据库并创建访问帐号。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 创建数据库</span><br><span class="line"><span class="keyword">CREATE</span> DATABASE wordpress;</span><br><span class="line"># 创建数据库用户和密码</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> wordpressuser<span class="variable">@localhost</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;wordress_password&#x27;</span>;</span><br><span class="line"># 设置 wordpressuser访问 wordpress 数据库权限</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> wordpress.<span class="operator">*</span> <span class="keyword">TO</span> wordpressuser<span class="variable">@localhost</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;wordress_password&#x27;</span>;</span><br><span class="line"># 刷新数据库设置</span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line"># 退出数据库</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<h2 id="下载安装-WordPress"><a href="#下载安装-WordPress" class="headerlink" title="下载安装 WordPress"></a>下载安装 WordPress</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载安装包（WordPress 没有中文发行包，需要通过后续配置下载中文语言包）。</span></span><br><span class="line">wget https://wordpress.org/latest.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压 wordpress</span></span><br><span class="line">tar xzvf latest.tar.gz</span><br><span class="line"><span class="comment"># 复制到 /var/www/html/wordpress 目录</span></span><br><span class="line">sudo rsync -avP ~/wordpress/ /var/www/html/wordpress/</span><br></pre></td></tr></table></figure>
+
+<h2 id="编辑-wp-config-php-文件"><a href="#编辑-wp-config-php-文件" class="headerlink" title="编辑 wp-config.php 文件"></a>编辑 wp-config.php 文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到wordpress目录</span></span><br><span class="line"><span class="built_in">cd</span> /var/www/html/wordpress</span><br><span class="line"><span class="comment"># 复制wp-config.php文件</span></span><br><span class="line">cp wp-config-sample.php wp-config.php</span><br><span class="line"><span class="comment"># 编辑wp-config.php文件</span></span><br><span class="line">sudo nano wp-config.php</span><br></pre></td></tr></table></figure>
+
+<p>配置数据库和中文语言包选项相关信息：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ** MySQL settings - You can get this info from your web host ** //</span></span><br><span class="line"><span class="comment">/** The name of the database for WordPress */</span></span><br><span class="line">define(<span class="string">&#x27;DB_NAME&#x27;</span>, <span class="string">&#x27;database_name_here&#x27;</span>);</span><br><span class="line"><span class="comment">/** MySQL database username */</span></span><br><span class="line">define(<span class="string">&#x27;DB_USER&#x27;</span>, <span class="string">&#x27;username_here&#x27;</span>);</span><br><span class="line"><span class="comment">/** MySQL database password */</span></span><br><span class="line">define(<span class="string">&#x27;DB_PASSWORD&#x27;</span>, <span class="string">&#x27;password_here&#x27;</span>);</span><br><span class="line"><span class="comment">/** MySQL hostname */</span></span><br><span class="line">define(<span class="string">&#x27;DB_HOST&#x27;</span>, <span class="string">&#x27;localhost&#x27;</span>);</span><br><span class="line"><span class="comment">/** 设置简体中文语言，如无此选项增加即可 */</span></span><br><span class="line">define(<span class="string">&#x27;WPLANG&#x27;</span>,<span class="string">&#x27;zh_CN&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装和配置-WordPress"><a href="#安装和配置-WordPress" class="headerlink" title="安装和配置 WordPress"></a>安装和配置 WordPress</h2><h3 id="安装-WordPress-1"><a href="#安装-WordPress-1" class="headerlink" title="安装 WordPress"></a>安装 WordPress</h3><p>浏览器打开：<a target="_blank" rel="noopener" href="http://127.0.0.1/wordpress/wp-admin/install.php">http://127.0.0.1/wordpress/wp-admin/install.php</a> 进入安装程序，安装完成后即可登录后台管理系统。<br><img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/post/img/326059876.png" alt="326059876.png"></p>
+<h3 id="设置-WordPress-语言为简体中文"><a href="#设置-WordPress-语言为简体中文" class="headerlink" title="设置 WordPress 语言为简体中文"></a>设置 WordPress 语言为简体中文</h3><blockquote>
+<p>再 <code>Site Language</code> 中选择简体中文（如无简体中文选项，请先配置 <code>wp-config.php</code> 文件中 <code>WPLANG</code> 为 <code>zh_CN</code>。），保存后系统会自动下载简体中文语言包。<br><img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/post/img/795327484.png" alt="795327484.png"></p>
+</blockquote>
+<h3 id="设置-WordPress-Url-重写配置"><a href="#设置-WordPress-Url-重写配置" class="headerlink" title="设置 WordPress Url 重写配置"></a>设置 WordPress Url 重写配置</h3><p>默认情况下 WordPress 会自动配置 Url 重写的站点配置文件<code>.htaccess</code>。如果系统安装好后无法启用固定链接，请检查<code>网站目录</code>（不建议放在网站根目录）下是否存在配置文件 <code>.htaccess</code>，如果没有需要新建该文件并输入以下文件内容：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;IfModule</span> <span class="string">mod_rewrite.c&gt;</span></span><br><span class="line">    <span class="string">RewriteEngine</span> <span class="string">On</span></span><br><span class="line">    <span class="string">RewriteCond</span> <span class="string">%&#123;REQUEST_FILENAME&#125;</span> <span class="string">!-f</span></span><br><span class="line">    <span class="string">RewriteCond</span> <span class="string">%&#123;REQUEST_FILENAME&#125;</span> <span class="string">!-d</span></span><br><span class="line">    <span class="string">RewriteRule</span> <span class="string">^(.*)$</span> <span class="string">index.php</span> [<span class="string">L</span>]</span><br><span class="line"><span class="string">&lt;/IfModule&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="更新出现-ftp-设置"><a href="#更新出现-ftp-设置" class="headerlink" title="更新出现 ftp 设置"></a>更新出现 ftp 设置</h2><p>点击<code>系统更新</code>或<code>查看系统更新进度</code>会出现 ftp 设置窗口，这是因为 WordPress 所在文件夹所属权限非 Apache 用户，系统不能自动更新。因此需要通过以下指令修改 WordPress 所在文件夹的所有者。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 WordPress 安装目录</span></span><br><span class="line"><span class="built_in">cd</span> /var/www/html/wordpress</span><br><span class="line"><span class="comment"># 修改当前文件夹的所属用户为 apache</span></span><br><span class="line">sudo chown -R apache:apache ./</span><br><span class="line"><span class="comment"># 查看当前文件夹所有者</span></span><br><span class="line">ls -l</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/post/img/3081847649.png" alt="3081847649.png"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CentOS 8 安装 Docker-CE - AiKIKI</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Aikiki,"> 
+    <meta name="description" content="Always CREATIVE.,CentOS 8 官方源 containerd.io 版本太低无法安装最新版 Docker-CE。
+一、CentOS 8 更换源为阿里云安装 wget 和 curl 组件：
+12yum instal,"> 
+    <meta name="author" content="樵子"> 
+    <link rel="alternative" href="atom.xml" title="AiKIKI" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?79e34085f0df88377b60532620bf43f0";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">AiKIKI</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://hexo.aikiki.top"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">CentOS 8 安装 Docker-CE</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">CentOS 8 安装 Docker-CE</h1>
+        <div class="stuff">
+            <span>三月 23, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Docker/" rel="tag">Docker</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>CentOS 8 官方源 containerd.io 版本太低无法安装最新版 Docker-CE。</p>
+<h1 id="一、CentOS-8-更换源为阿里云"><a href="#一、CentOS-8-更换源为阿里云" class="headerlink" title="一、CentOS 8 更换源为阿里云"></a>一、CentOS 8 更换源为阿里云</h1><p>安装 wget 和 curl 组件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install wget -y</span><br><span class="line">yum install curl -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="1、备份原文件"><a href="#1、备份原文件" class="headerlink" title="1、备份原文件"></a>1、备份原文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mv /etc/yum.repos.d/CentOS-Linux-BaseOS.repo /etc/yum.repos.d/CentOS-Linux-BaseOS.repo.backup</span><br><span class="line">mv /etc/yum.repos.d/CentOS-Linux-PowerTools.repo /etc/yum.repos.d/CentOS-Linux-PowerTools.repo.backup</span><br><span class="line">mv /etc/yum.repos.d/CentOS-Linux-Extras.repo /etc/yum.repos.d/CentOS-Linux-Extras.repo.backup</span><br><span class="line">mv /etc/yum.repos.d/CentOS-Linux-Plus.repo /etc/yum.repos.d/CentOS-Linux-Plus.repo.backup</span><br><span class="line">mv /etc/yum.repos.d/CentOS-Linux-AppStream.repo /etc/yum.repos.d/CentOS-Linux-AppStream.repo.backup</span><br></pre></td></tr></table></figure>
+<p>以上文件都需要重新命名，因为阿里云源里<code>Centos-8.repo</code>包含了上述所有文件，如果按照传统手法只更改<code>CentOS-Linux-BaseOS.repo</code>这个文件 会出现以下错误提示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Updating Subscription Management repositories.</span><br><span class="line">Unable to <span class="built_in">read</span> consumer identity</span><br><span class="line">This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.</span><br><span class="line">Repository AppStream is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository extras is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository PowerTools is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository centosplus is listed more than once <span class="keyword">in</span> the configuration</span><br></pre></td></tr></table></figure>
+<h2 id="2、修改为阿里云"><a href="#2、修改为阿里云" class="headerlink" title="2、修改为阿里云"></a>2、修改为阿里云</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Linux-BaseOS.repo http://mirrors.aliyun.com/repo/Centos-8.repo</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、运行-yum-makecache-生成缓存"><a href="#3、运行-yum-makecache-生成缓存" class="headerlink" title="3、运行 yum makecache 生成缓存"></a>3、运行 yum makecache 生成缓存</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<h1 id="二、安装-Docker"><a href="#二、安装-Docker" class="headerlink" title="二、安装 Docker"></a>二、安装 Docker</h1><h2 id="1、修改-Docker-源为阿里云"><a href="#1、修改-Docker-源为阿里云" class="headerlink" title="1、修改 Docker 源为阿里云"></a>1、修改 Docker 源为阿里云</h2><p>Docker源配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@centos ~]<span class="comment"># cat /etc/yum.repos.d/docker-ce.repo</span></span><br><span class="line">[docker-ce-stable]</span><br><span class="line">name=Docker CE Stable - <span class="variable">$basearch</span></span><br><span class="line">baseurl=https://mirrors.aliyun.com/docker-ce/linux/centos/7/<span class="variable">$basearch</span>/stable</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/docker-ce/linux/centos/gpg</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、安装-docker-ce"><a href="#2、安装-docker-ce" class="headerlink" title="2、安装 docker-ce"></a>2、安装 docker-ce</h2><p>默认安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@centos /etc/yum.repos.d]<span class="comment"># yum install -y docker-ce</span></span><br><span class="line">上次元数据过期检查：0:02:30 前，执行于 2021年03月23日 星期二 10时56分16秒。</span><br><span class="line">错误：</span><br><span class="line"> 问题: package docker-ce-3:20.10.5-3.el7.x86_64 requires containerd.io &gt;= 1.4.1, but none of the providers can be installed</span><br><span class="line">  - cannot install the best candidate <span class="keyword">for</span> the job</span><br><span class="line">  - package containerd.io-1.4.3-3.1.el7.x86_64 is filtered out by modular filtering</span><br><span class="line">  - package containerd.io-1.4.3-3.2.el7.x86_64 is filtered out by modular filtering</span><br><span class="line">  - package containerd.io-1.4.4-3.1.el7.x86_64 is filtered out by modular filtering</span><br><span class="line">(尝试添加 <span class="string">&#x27;--skip-broken&#x27;</span> 来跳过无法安装的软件包 或 <span class="string">&#x27;--nobest&#x27;</span> 来不只使用最佳选择的软件包)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>centos 官方源的 containerd.io 版本太低，无法安装。</p>
+<p>可以在 docker 官方源找到合适的版本，手动安装。</p>
+<blockquote>
+<p>Docker 官方源：<code>https://download.docker.com/linux/centos/</code><br>Docker 阿里云源：<code>https://mirrors.aliyun.com/docker-ce/linux/centos/</code></p>
+</blockquote>
+<p>从阿里云强制安装 containerd.io</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install  --allowerasing -y https://mirrors.aliyun.com/docker-ce/linux/centos/8/x86_64/stable/Packages/containerd.io-1.4.4-3.1.el8.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<p>安装 docker-ce</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y docker-ce</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、修改-docker-源"><a href="#3、修改-docker-源" class="headerlink" title="3、修改 docker 源"></a>3、修改 docker 源</h2><blockquote>
+<p>配置文件路径为： /etc/docker/daemon.json。<br>没有该文件的话，请先建一个。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano  /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
+
+<p>配置文件内容：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">&quot;registry-mirrors&quot;</span> : [</span><br><span class="line">   <span class="string">&quot;https://mirror.ccs.tencentyun.com&quot;</span>,</span><br><span class="line">   <span class="string">&quot;http://registry.docker-cn.com&quot;</span>,</span><br><span class="line">   <span class="string">&quot;http://docker.mirrors.ustc.edu.cn&quot;</span>,</span><br><span class="line">   <span class="string">&quot;http://hub-mirror.c.163.com&quot;</span></span><br><span class="line"> ],</span><br><span class="line"> <span class="attr">&quot;insecure-registries&quot;</span> : [</span><br><span class="line">   <span class="string">&quot;registry.docker-cn.com&quot;</span>,</span><br><span class="line">   <span class="string">&quot;docker.mirrors.ustc.edu.cn&quot;</span></span><br><span class="line"> ],</span><br><span class="line"> <span class="attr">&quot;debug&quot;</span> : <span class="literal">true</span>,</span><br><span class="line"> <span class="attr">&quot;experimental&quot;</span> : <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>建议使用阿里云，配置方式参见阿里云文档。</p>
+<h2 id="4、安装-docker-compose"><a href="#4、安装-docker-compose" class="headerlink" title="4、安装 docker-compose"></a>4、安装 docker-compose</h2><p>运行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://github.com/docker/compose/releases/download/1.3.3/docker-compose-`uname -s`-`uname -m` &gt; /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>1.3.3版本的 yml 配置文件和老版本有差异。</p>
+</blockquote>
+<p>使用国内源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.5/docker-compose-`uname -s`-`uname -m` &gt; /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<p>给docker-compose执行权限，运行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">检查</span><br><span class="line">```bash</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

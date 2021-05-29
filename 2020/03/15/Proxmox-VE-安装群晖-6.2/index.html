@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Proxmox VE 安装群晖 6.2 - AiKIKI</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Aikiki,"> 
+    <meta name="description" content="Always CREATIVE.,新建 PVE 虚拟机，修改网卡为 E1000e。群晖 6.2 以上版本，启动后找不到服务器。原因是群晖不识别 PVE 虚拟机的 E1000 网卡，将网卡修改为 E1000e 即可找到服务器进入安装程,"> 
+    <meta name="author" content="樵子"> 
+    <link rel="alternative" href="atom.xml" title="AiKIKI" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?79e34085f0df88377b60532620bf43f0";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">AiKIKI</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://hexo.aikiki.top"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Proxmox VE 安装群晖 6.2</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Proxmox VE 安装群晖 6.2</h1>
+        <div class="stuff">
+            <span>三月 15, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Proxmox-VE/" rel="tag">Proxmox VE</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Synology/" rel="tag">Synology</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="新建-PVE-虚拟机，修改网卡为-E1000e。"><a href="#新建-PVE-虚拟机，修改网卡为-E1000e。" class="headerlink" title="新建 PVE 虚拟机，修改网卡为 E1000e。"></a>新建 PVE 虚拟机，修改网卡为 <code>E1000e</code>。</h1><p>群晖 6.2 以上版本，启动后找不到服务器。原因是群晖不识别 PVE 虚拟机的 <code>E1000</code> 网卡，将网卡修改为 <code>E1000e</code> 即可找到服务器进入安装程序。</p>
+<blockquote>
+<p>新建虚拟机网卡必须选择<code>E1000</code>。<br>虚拟机不需要启动。</p>
+</blockquote>
+<p>修改建好的虚拟机网卡步骤如下：</p>
+<h2 id="获取网卡配置参数"><a href="#获取网卡配置参数" class="headerlink" title="获取网卡配置参数"></a>获取网卡配置参数</h2><p>101为虚拟机id，根据自己实际情况修改</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qm showcmd 101</span><br></pre></td></tr></table></figure>
+<p>记录输出值，只需要注意最后一个 <code>-netdev</code> 开始的字段。<br>输出值如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/kvm -id 101 -name DS3617xs ...这里省略N个字符... -netdev <span class="string">&#x27;type=tap,id=net0,ifname=tap101i0,script=/var/lib/qemu-server/pve-bridge,downscript=/var/lib/qemu-server/pve-bridgedown&#x27;</span> -device <span class="string">&#x27;e1000,mac=00:11:32:33:44:55,netdev=net0,bus=pci.0,addr=0x12,id=net0&#x27;</span> -machine <span class="string">&#x27;type=pc&#x27;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>建议将上面的输出复制到文本文件中便于下一步修改。</p>
+</blockquote>
+<h2 id="提取虚拟机网卡配置信息并修改"><a href="#提取虚拟机网卡配置信息并修改" class="headerlink" title="提取虚拟机网卡配置信息并修改"></a>提取虚拟机网卡配置信息并修改</h2><p>在上面的输出值中查找第一个<code>-netdev</code>，以此开始按照下面的模板删除一些无用字段，并修改 <code>E1000</code>为<code>E1000e</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  按下面的例子删除一些无用字段，行首添加“args:” ,修改“E1000” 为 “E1000e”，保存。</span></span><br><span class="line">args: -netdev <span class="string">&#x27;type=tap,id=net0,ifname=tap101i0&#x27;</span> -device <span class="string">&#x27;e1000e,mac=00:11:32:33:44:55,netdev=net0,bus=pci.0,addr=0x12,id=net0,bootindex=300&#x27;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>修改的好的信息将用于下一步写入虚拟机的配置文件。</p>
+</blockquote>
+<h2 id="将配置信息写入虚拟机配置文件"><a href="#将配置信息写入虚拟机配置文件" class="headerlink" title="将配置信息写入虚拟机配置文件"></a>将配置信息写入虚拟机配置文件</h2><p>修改 id 为101的配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano /etc/pve/qemu-server/101.conf</span><br></pre></td></tr></table></figure>
+<p>在编辑框中的首行插入一行上一步修改好的字符串，注意要换行，不要和原本的配置文件粘在一起了。</p>
+<h2 id="删除虚拟机原来的网卡配置"><a href="#删除虚拟机原来的网卡配置" class="headerlink" title="删除虚拟机原来的网卡配置"></a>删除虚拟机原来的网卡配置</h2><p>到 pve 对应 <code>虚拟机-硬件</code> 界面删除 <code>E1000</code> 网卡。然后启动虚拟机，如果不报错误，应该就会有网络了。</p>
+<blockquote>
+<p><code>虚拟机-硬件</code>选项界面不会显示 <code>E1000e</code> 网卡，如果启动成功实际是通过参数方式加载了虚拟网卡。</p>
+</blockquote>
+<h1 id="安装群晖系统到-PVE-虚拟机"><a href="#安装群晖系统到-PVE-虚拟机" class="headerlink" title="安装群晖系统到 PVE 虚拟机"></a>安装群晖系统到 PVE 虚拟机</h1><h2 id="删除默认硬盘"><a href="#删除默认硬盘" class="headerlink" title="删除默认硬盘"></a>删除默认硬盘</h2><ul>
+<li>删除硬盘，选择<code>虚拟机-硬件</code>，找到硬盘，选中点击<code>分离</code>。</li>
+<li>硬盘分离后，选中<code>未使用的磁盘0</code>，点击<code>删除</code>。</li>
+</ul>
+<h2 id="设置群晖启动盘"><a href="#设置群晖启动盘" class="headerlink" title="设置群晖启动盘"></a>设置群晖启动盘</h2><ul>
+<li>使用 WinSCP 把解压出来的 <code>synoboot.img</code> 上传到<code>/root</code>目录。</li>
+<li>导入 img 磁盘镜像到虚拟机。<ul>
+<li>SSH 登录 PVE.</li>
+<li>输入以下指令导入引导盘到虚拟机。系统提示<code>vm-101-disk-0</code>正在创建,<code>101</code>是虚拟机编号，<code>synoboot.img</code>是刚才上传的引导镜像。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qm importdisk 101 /root/synoboot.img local-lvm </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>增加磁盘到虚拟机。<ul>
+<li>进入<code>虚拟机-硬件</code>设置，选中<code>未使用的磁盘0</code>(上一步导入的引导镜像磁盘)。</li>
+<li>点击编辑，设置总线/设备为<code>SATA</code>和<code>0</code>，磁盘镜像选择<code>vm-101-disk-0</code>。</li>
+</ul>
+</li>
+<li>修改引导顺序<ul>
+<li>进入<code>虚拟机-选项</code>，选择<code>引导顺序</code>。</li>
+<li>点击编辑，将<code>引导设备1</code>改为<code>Disk &#39;sata0&#39;</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="增加系统盘"><a href="#增加系统盘" class="headerlink" title="增加系统盘"></a>增加系统盘</h2><p>增加一块系统盘用于安装群晖系统。</p>
+<ul>
+<li>点击<code>虚拟机-硬件</code>，添加<code>添加</code>下拉菜单中的<code>硬盘</code>。</li>
+<li>总线/设备选择<code>SATA</code>和<code>1</code>，存储选择<code>local-vm</code>，磁盘大小设置为<code>10G</code>够用。</li>
+</ul>
+<p>现在可以开机，进入群晖安装程序安装系统。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
