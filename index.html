@@ -1,340 +1,257 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AiKIKI - Welcome!</title><meta name="author" content="樵子"><meta name="copyright" content="樵子"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Always CREATIVE.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AiKIKI">
+<meta property="og:url" content="https://www.aikiki.top/hexo/index.html">
+<meta property="og:site_name" content="AiKIKI">
+<meta property="og:description" content="Always CREATIVE.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/avatar.png">
+<meta property="article:author" content="樵子">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/avatar.png"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/favicon.ico"><link rel="canonical" href="https://www.aikiki.top/hexo/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/hexo/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?79e34085f0df88377b60532620bf43f0";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/hexo/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'AiKIKI',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-05-29 14:08:40'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-<!DOCTYPE html>
-<html lang="zh-CN" class="loading">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AiKIKI - Welcome!</title>
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="google" content="notranslate" />
-    <meta name="keywords" content="Aikiki,"> 
-    <meta name="description" content="Always CREATIVE.,"> 
-    <meta name="author" content="樵子"> 
-    <link rel="alternative" href="atom.xml" title="AiKIKI" type="application/atom+xml"> 
-    <link rel="icon" href="/img/favicon.png"> 
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-    
-<link rel="stylesheet" href="/css/diaspora.css">
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/hexo/atom.xml" title="AiKIKI" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/avatar.png" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/hexo/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/hexo/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/hexo/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/hexo/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/hexo/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/hexo/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/hexo/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://img.aikiki.top/"><i class="fa-fw fas fa-image"></i><span> Album</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://code.aikiki.top/"><i class="fa-fw fab fa-git"></i><span> Git</span></a></div><div class="menus_item"><a class="site-page" href="/hexo/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/hexo/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://open.saintic.com/api/bingPic/')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/hexo/">AiKIKI</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/hexo/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/hexo/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/hexo/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/hexo/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://img.aikiki.top/"><i class="fa-fw fas fa-image"></i><span> Album</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://code.aikiki.top/"><i class="fa-fw fab fa-git"></i><span> Git</span></a></div><div class="menus_item"><a class="site-page" href="/hexo/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/hexo/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">AiKIKI</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/acmeist" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:huweighost@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/hexo/atom.xml" target="_blank" title="Rss"><i class="fas fa-rss"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/hexo/post/ea01/" title="CentOS 8 安装 Docker-CE">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/centos-logo-horizontal.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="CentOS 8 安装 Docker-CE"></a></div><div class="recent-post-info"><a class="article-title" href="/hexo/post/ea01/" title="CentOS 8 安装 Docker-CE">CentOS 8 安装 Docker-CE</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-22T18:24:00.000Z" title="发表于 2021-03-23 02:24:00">2021-03-23</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/hexo/categories/Archives/">Archives</a></span></div><div class="content">CentOS 8 官方源 containerd.io 版本太低无法安装最新版 Docker-CE。
+一、CentOS 8 更换源为阿里云安装 wget 和 curl 组件：
+12yum install wget -yyum install curl -y
 
-	<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?79e34085f0df88377b60532620bf43f0";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-	</script>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body class="loading">
-    <span id="config-title" style="display:none">AiKIKI</span>
-    <div id="loader"></div>
-    <div class="nav">
-    <ul id="menu-menu" class="menu">
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="//" title="首页" target="_blank" rel="noopener">首页</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/categories/" title="分类" target="_blank" rel="noopener">分类</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/tags/" title="标签" target="_blank" rel="noopener">标签</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/archives/" title="归档" target="_blank" rel="noopener">归档</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/about/" title="关于" target="_blank" rel="noopener">关于</a>
-        </li>
-        
-    </ul>
-	<span class="target"></span>
-	<center>
-	<div class="hitokoto">
-		<span class="typed" id="hitokoto" data-st="true"></span>
-	</div>
-	</center>
-	
-	<p class="footerlinks">
-		<a href="#" class="iconfont icon-null"></a>
-		
-            <a href="https://github.com/acmeist" title="github" class="iconfont icon-github" target="_blank" rel="noopener"> </a>
-        
-            <a href="mailto:huweighost@gmail.com" title="email" class="iconfont icon-email" target="_blank" rel="noopener"> </a>
-        
-		<a href="#" class="iconfont icon-null"></a>
-	</p>
-	
-    <p id="copyright">
-        &copy; 2021 樵子.
-        <span> | </span>Powered by <a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
-        <span> | </span>Theme <a href="https://github.com/Fechin/hexo-theme-diaspora" title="Diaspora" target="_blank" rel="noopener">Diaspora</a> by Fechin
-		
-		<span> | </span><a rel="nofollow" href="https://beian.miit.gov.cn" target="_blank">渝ICP备19007019号</a>
-		
-    </p>
-</div>
-
-<div id="container">
-    
-<div id="screen">
-    <div id="mark">
-        <div class="layer" data-depth="0.4">
-            <img src="https://open.saintic.com/api/bingPic/" id="cover" crossorigin="anonymous" width="1920" height="1080">
-        </div>
-    </div>
-    <div id="vibrant">
-        <svg viewBox="0 0 2880 1620" height="100%" preserveAspectRatio="xMaxYMax slice">
-            <polygon opacity="0.7" points="2000,1620 0,1620 0,0 600,0 "/>
-        </svg>
-        <div></div>
-    </div>
-    <div id="header">
-        <div>
-            <a class="image-logo" href="/"></a>
-			
-			<div class="iconfont icon-search switchsearch" href="/search/" title="搜索"></div>
-			
-            <div class="iconfont icon-menu switchmenu"></div>
-        </div>
-    </div>
-    
-    <div id="post0">
-        <p>三月 23, 2021</p>
-        <h2><a href="/2021/03/23/CentOS-8-%E5%AE%89%E8%A3%85-Docker-CE/" title="CentOS 8 安装 Docker-CE" class="posttitle">CentOS 8 安装 Docker-CE</a></h2>
-        <p class="summary">CentOS 8 官方源 containerd.io 版本太低无法安装最新版 Docker-CE。
-一、CentO...</p>
-    </div>
-    
-</div>
-
-    <div id="primary">
-        
-<div class="post">
-    <a href="/2020/06/01/Proxmox-VE-6.2-%E5%9B%BD%E5%86%85%E6%BA%90%E8%AE%BE%E7%BD%AE/" title="Proxmox VE 6.2 国内源设置">
-	
-        <img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/thumbs/15.jpg" class="cover" width="680" height="440">
-	
-    </a>
-    <div class="else">
-        <p>六月 01, 2020</p>
-        <h3><a href="/2020/06/01/Proxmox-VE-6.2-%E5%9B%BD%E5%86%85%E6%BA%90%E8%AE%BE%E7%BD%AE/" title="Proxmox VE 6.2 国内源设置" class="posttitle">Proxmox VE 6.2 国内源设置</a></h3>
-        <p>更换 PVE 社区源删除企业源1rm -rf /etc/apt/sources.list.d/pve-enterprise.list
-下载秘钥1wget ...</p>
-    </div>
-</div>
-
-
-<div class="post">
-    <a href="/2020/05/09/%E4%BD%BF%E7%94%A8-Windows-%E8%87%AA%E5%B8%A6%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2-mstsc-%E8%BF%9E%E6%8E%A5-CentOS-8/" title="使用 Windows 自带的远程桌面 mstsc 连接 CentOS 8">
-	
-        <img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/thumbs/3.jpg" class="cover" width="680" height="440">
-	
-    </a>
-    <div class="else">
-        <p>五月 09, 2020</p>
-        <h3><a href="/2020/05/09/%E4%BD%BF%E7%94%A8-Windows-%E8%87%AA%E5%B8%A6%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2-mstsc-%E8%BF%9E%E6%8E%A5-CentOS-8/" title="使用 Windows 自带的远程桌面 mstsc 连接 CentOS 8" class="posttitle">使用 Windows 自带的远程桌面 mstsc 连接 CentOS 8</a></h3>
-        <p>CentOS 8 和 CentOS 7 有些差别。主要是：
+1、备份原文件12345mv /etc/yum.repos.d/CentOS-Linux-BaseOS.repo /etc/yum.repos.d/CentOS-Linux-BaseOS.repo.backupmv /etc/yum.repos.d/CentOS-Linux-PowerTools.repo /etc/yum.repos.d/CentOS-Linux-PowerTools.repo.backupmv /etc/yum.repos.d/CentOS-Linux-Extras.repo /etc/yum.repos.d/CentOS-Linux-Extras.repo.backupmv /etc/yum.repos.d/CentOS-Linux-Plus.repo /etc/yum.repos.d/CentOS-Linux ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/hexo/post/862b/" title="Proxmox VE 6.2 国内源设置">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/proxmox-logo.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="Proxmox VE 6.2 国内源设置"></a></div><div class="recent-post-info"><a class="article-title" href="/hexo/post/862b/" title="Proxmox VE 6.2 国内源设置">Proxmox VE 6.2 国内源设置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-01T08:18:00.000Z" title="发表于 2020-06-01 16:18:00">2020-06-01</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/hexo/categories/Archives/">Archives</a></span></div><div class="content">更换 PVE 社区源删除企业源1rm -rf /etc/apt/sources.list.d/pve-enterprise.list
+下载秘钥1wget http://download.proxmox.com/debian/proxmox-ve-release-6.x.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-6.x.gpg
+添加社区源1echo &quot;deb http://download.proxmox.wiki/debian/pve stretch pve-no-subscription&quot; &gt;/etc/apt/sources.list.d/pve-install-repo.list
+更换 Debian 国内源备份原文件备份原文件： /etc/apt/sources.list
+1cp /etc/apt/sources.list /etc/apt/sources.list.bak
+编辑源信息1nano /etc/apt/sources.list
+在原文件增加下面的内容
+12345678deb http:// ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/hexo/post/def6/" title="使用 Windows 自带的远程桌面 mstsc 连接 CentOS 8">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/centos-logo-horizontal.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="使用 Windows 自带的远程桌面 mstsc 连接 CentOS 8"></a></div><div class="recent-post-info"><a class="article-title" href="/hexo/post/def6/" title="使用 Windows 自带的远程桌面 mstsc 连接 CentOS 8">使用 Windows 自带的远程桌面 mstsc 连接 CentOS 8</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-09T01:43:00.000Z" title="发表于 2020-05-09 09:43:00">2020-05-09</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/hexo/categories/Archives/">Archives</a></span></div><div class="content">CentOS 8 和 CentOS 7 有些差别。主要是：
 
 不要安装 vnc-server
 
-安装 XRDP切换为 root 用户：1sudo su -...</p>
-    </div>
-</div>
+安装 XRDP切换为 root 用户：1sudo su - root
 
+安装 epel 库查询是否已经安装 epel 库:
+1rpm -qa|grep epel
+如果 epel 库没有安装，则安装它：
+1yum install epel-release
 
-<div class="post">
-    <a href="/2020/03/25/%E7%BB%99-Docker-%E4%B8%AD%E7%9A%84-PHP-%E5%AE%89%E8%A3%85%20GD%20%E6%89%A9%E5%B1%95/" title="给 Docker 中的 PHP 安装 GD 扩展">
-	
-        <img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/thumbs/2.jpg" class="cover" width="680" height="440">
-	
-    </a>
-    <div class="else">
-        <p>三月 25, 2020</p>
-        <h3><a href="/2020/03/25/%E7%BB%99-Docker-%E4%B8%AD%E7%9A%84-PHP-%E5%AE%89%E8%A3%85%20GD%20%E6%89%A9%E5%B1%95/" title="给 Docker 中的 PHP 安装 GD 扩展" class="posttitle">给 Docker 中的 PHP 安装 GD 扩展</a></h3>
-        <p>安装 php:5.6.40-fpm 发现没有 GD 库。直接通过 docker-php-ext-install gd 安装。执行安装后查询结果居然是没有安...</p>
-    </div>
-</div>
+安装 XRDP安装 xrdp 服务：
+1yum install xrdp
 
+设置 XRDP配置 XRDP修改 xrdp 最大连接数（使用默认值，不修改也是可以的） ：
+1vim /etc/xrdp/xrdp.ini 
 
-<div class="post">
-    <a href="/2020/03/22/Docker-%E6%90%AD%E5%BB%BA-DNMP-%E7%8E%AF%E5%A2%83/" title="Docker 搭建 DNMP 环境">
-	
-        <img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/thumbs/10.jpg" class="cover" width="680" height="440">
-	
-    </a>
-    <div class="else">
-        <p>三月 22, 2020</p>
-        <h3><a href="/2020/03/22/Docker-%E6%90%AD%E5%BB%BA-DNMP-%E7%8E%AF%E5%A2%83/" title="Docker 搭建 DNMP 环境" class="posttitle">Docker 搭建 DNMP 环境</a></h3>
-        <p>Linxu 下搭建 Nginx、PHP 和 MariaDB 称之为 LNMP，那么我们在 Docker 下搭建就叫 DNMP 吧（虽然我不知道这样叫是否正...</p>
-    </div>
-</div>
+12//默认是32：max_bpp=32
 
+启动 XRDP1234//启动 xrdp 服务：systemctl start xrdp//设置 xrdp 服务开机自启动：systemctl enable xrdp
 
-<div class="post">
-    <a href="/2020/03/22/Debian-10-%E5%AE%89%E8%A3%85-Docker-CE/" title="Debian 10 安装 Docker-CE">
-	
-        <img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/thumbs/13.jpg" class="cover" width="680" height="440">
-	
-    </a>
-    <div class="else">
-        <p>三月 22, 2020</p>
-        <h3><a href="/2020/03/22/Debian-10-%E5%AE%89%E8%A3%85-Docker-CE/" title="Debian 10 安装 Docker-CE" class="posttitle">Debian 10 安装 Docker-CE</a></h3>
-        <p>安装 docker
+设置防火墙开放端口 33891234//开启 3389 端口firewall-cmd --zone=public --add-port=3389 /tcp --permanent//重启防火墙firewall-cm ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/hexo/post/f10f/" title="给 Docker 中的 PHP 安装 GD 扩展">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/docker-logo-horizontal.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="给 Docker 中的 PHP 安装 GD 扩展"></a></div><div class="recent-post-info"><a class="article-title" href="/hexo/post/f10f/" title="给 Docker 中的 PHP 安装 GD 扩展">给 Docker 中的 PHP 安装 GD 扩展</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-03-25T05:28:00.000Z" title="发表于 2020-03-25 13:28:00">2020-03-25</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/hexo/categories/Archives/">Archives</a></span></div><div class="content">安装 php:5.6.40-fpm 发现没有 GD 库。直接通过 docker-php-ext-install gd 安装。执行安装后查询结果居然是没有安装，看来的自己编译。
+进入 php 容器1$ docker exec -it &lt;CONTAINER-ID or CONTAINER-NAME&gt; /bin/bash
+
+修改 Debian 软件源镜像站123456789# 进入软件源目录cd /etc/apt# 备份源文件cp sources.list sources.list.backup  # 替换源地址为 aliyunsed -i &#x27;s/deb.debian.org/mirrors.aliyun.com/g&#x27; sources.listsed -i &#x27;s/security.debian.org/mirrors.aliyun.com/g&#x27; sources.list# 更新软件源apt update  
+
+安装 GD 库123456789101112# 安装需要的库文件apt install -y libwebp-dev libjpeg ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/hexo/post/6f9d/" title="Docker 搭建 DNMP 环境">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/docker-logo-horizontal.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="Docker 搭建 DNMP 环境"></a></div><div class="recent-post-info"><a class="article-title" href="/hexo/post/6f9d/" title="Docker 搭建 DNMP 环境">Docker 搭建 DNMP 环境</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-03-22T08:13:00.000Z" title="发表于 2020-03-22 16:13:00">2020-03-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/hexo/categories/Archives/">Archives</a></span></div><div class="content">Linxu 下搭建 Nginx、PHP 和 MariaDB 称之为 LNMP，那么我们在 Docker 下搭建就叫 DNMP 吧（虽然我不知道这样叫是否正确）。
+配置单机网桥由于这几个镜像相互之间需要通信，最好的解决方案是创建一个容器网络。因此我们首先需要创建 Docker 网络 localnet，用于 docker 之间的通信。
+12345# Linux$ docker network create -d bridge localnet# Windows&gt; docker network create -d nat localnet
+查看创建好的网络。
+123456$ docker network list NETWORK ID          NAME                DRIVER              SCOPEb7228b827811        bridge              bridge              localaf39f057ff30        host                host                ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/hexo/post/fed3/" title="Debian 10 安装 Docker-CE">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/docker-logo-horizontal.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="Debian 10 安装 Docker-CE"></a></div><div class="recent-post-info"><a class="article-title" href="/hexo/post/fed3/" title="Debian 10 安装 Docker-CE">Debian 10 安装 Docker-CE</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-03-22T06:13:00.000Z" title="发表于 2020-03-22 14:13:00">2020-03-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/hexo/categories/Archives/">Archives</a></span></div><div class="content">安装 docker
 这里使用阿里云的源进行安装。
 
 安装任何组件前的好习惯更新1apt-get update
-安装必要的系统工具1apt-get -y i...</p>
-    </div>
-</div>
+安装必要的系统工具1apt-get -y install apt-transport-https ca-certificates curl software-properties-common
+安装 GPG 证书1curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/debian/gpg | sudo apt-key add -
+写入软件源1add-apt-repository &quot;deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/debian $(lsb_release -cs) stable&quot;
+更新并安装 docker-ce12apt-get -y updateapt-get -y install docker-ce
+查看 docker 版本1docker -v
+系统显示：
+1Docker version 19.03.8, build a ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/hexo/post/1554/" title="使用 Windows 自带的远程桌面 mstsc 连接 Debian 10">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/debian-logo-horizontal.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="使用 Windows 自带的远程桌面 mstsc 连接 Debian 10"></a></div><div class="recent-post-info"><a class="article-title" href="/hexo/post/1554/" title="使用 Windows 自带的远程桌面 mstsc 连接 Debian 10">使用 Windows 自带的远程桌面 mstsc 连接 Debian 10</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-03-19T18:01:52.000Z" title="发表于 2020-03-20 02:01:52">2020-03-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/hexo/categories/Archives/">Archives</a></span></div><div class="content">方法一安装远程桌面服务1apt-get install tigervnc-standalone-server
+新建配置文件新建配置文件，使的远程登录时默认使用 xfce4 作为登录界面。
+1echo xfce4-session&gt;/home/username/.xsession
 
+如果安装了其他桌面环境，可以更换 xfce4-session 为:
+1234&quot;startkde&quot;  #使用KDE&quot;cinnamon-session&quot;  #使用cinnamon&quot;mate-session&quot;  #使用mate&quot;gnome-session&quot;  #gnome
 
-<div class="post">
-    <a href="/2020/03/20/%E4%BD%BF%E7%94%A8-Windows-%E8%87%AA%E5%B8%A6%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2-mstsc-%E8%BF%9E%E6%8E%A5-Debian-10/" title="使用 Windows 自带的远程桌面 mstsc 连接 Debian 10">
-	
-        <img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/thumbs/14.jpg" class="cover" width="680" height="440">
-	
-    </a>
-    <div class="else">
-        <p>三月 20, 2020</p>
-        <h3><a href="/2020/03/20/%E4%BD%BF%E7%94%A8-Windows-%E8%87%AA%E5%B8%A6%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2-mstsc-%E8%BF%9E%E6%8E%A5-Debian-10/" title="使用 Windows 自带的远程桌面 mstsc 连接 Debian 10" class="posttitle">使用 Windows 自带的远程桌面 mstsc 连接 Debian 10</a></h3>
-        <p>方法一安装远程桌面服务1apt-get install tigervnc-standalone-server
-新建配置文件新建配置文件，使的远程登录时默认...</p>
-    </div>
-</div>
+安装 xrdp1apt-get install xrdp
 
+重启服务端后登陆
+一定要重启服务端，否则登录进去是一个空白桌面。
 
-<div class="post">
-    <a href="/2020/03/17/Debian-10-%E8%A7%A3%E5%86%B3--etc-rc.local-%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E9%97%AE%E9%A2%98/" title="Debian 10 解决 /etc/rc.local 开机启动问题">
-	
-        <img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/thumbs/13.jpg" class="cover" width="680" height="440">
-	
-    </a>
-    <div class="else">
-        <p>三月 17, 2020</p>
-        <h3><a href="/2020/03/17/Debian-10-%E8%A7%A3%E5%86%B3--etc-rc.local-%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E9%97%AE%E9%A2%98/" title="Debian 10 解决 &#x2F;etc&#x2F;rc.local 开机启动问题" class="posttitle">Debian 10 解决 &#x2F;etc&#x2F;rc.local 开机启动问题</a></h3>
-        <p>由于某些软件没有开机自动启动的服务，很多时候需要手工添加，一般我们都是推荐添加命令到 /etc/rc.local 文件，但是 Debian 10 默认不带...</p>
-    </div>
-</div>
+使用普通用户登录成功后，系统会提示输入两次 root 密码。
+关于卸载 xserver-xorg-legacy（非必要）
+此步非必要，如果登录后是一个空白桌面可以尝试该方法。参考
 
-
-<div class="post">
-    <a href="/2020/03/17/Debian-10-%E6%90%AD%E5%BB%BA-nfs-%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Debian 10 搭建 nfs 服务器">
-	
-        <img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/thumbs/6.jpg" class="cover" width="680" height="440">
-	
-    </a>
-    <div class="else">
-        <p>三月 17, 2020</p>
-        <h3><a href="/2020/03/17/Debian-10-%E6%90%AD%E5%BB%BA-nfs-%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Debian 10 搭建 nfs 服务器" class="posttitle">Debian 10 搭建 nfs 服务器</a></h3>
-        <p>安装 nfs 服务器1[root@debian /root]#  apt-get install nfs-kernel-server
+1apt-get purge xserver-xorg ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/hexo/post/7ae0/" title="Debian 10 解决 /etc/rc.local 开机启动问题">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/debian-logo-horizontal.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="Debian 10 解决 /etc/rc.local 开机启动问题"></a></div><div class="recent-post-info"><a class="article-title" href="/hexo/post/7ae0/" title="Debian 10 解决 /etc/rc.local 开机启动问题">Debian 10 解决 /etc/rc.local 开机启动问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-03-16T18:07:00.000Z" title="发表于 2020-03-17 02:07:00">2020-03-17</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/hexo/categories/Archives/">Archives</a></span></div><div class="content">由于某些软件没有开机自动启动的服务，很多时候需要手工添加，一般我们都是推荐添加命令到 /etc/rc.local 文件，但是 Debian 10 默认不带 /etc/rc.local 文件，而 rc.local 服务却还是自带的.
+查看服务配置文件123456789101112131415161718192021222324[root@debian /root]#  cat /lib/systemd/system/rc.local.service#   SPDX-License-Identifier: LGPL-2.1+# #   This file is part of systemd.# #   systemd is free software; you can redistribute it and/or modify it#   under the terms of the GNU Lesser General Public License as published by#   the Free Software Foundation; either version 2.1 o ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/hexo/post/9480/" title="Debian 10 搭建 nfs 服务器">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/debian-logo-horizontal.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="Debian 10 搭建 nfs 服务器"></a></div><div class="recent-post-info"><a class="article-title" href="/hexo/post/9480/" title="Debian 10 搭建 nfs 服务器">Debian 10 搭建 nfs 服务器</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-03-16T18:06:53.000Z" title="发表于 2020-03-17 02:06:53">2020-03-17</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/hexo/categories/Archives/">Archives</a></span></div><div class="content">安装 nfs 服务器1[root@debian /root]#  apt-get install nfs-kernel-server
 修改服务端配置文件
-...</p>
-    </div>
-</div>
+如果只使用客户端功能，可忽略此步操作。
 
+12345678910111213[root@debian /root]#  nano /etc/exports #  /etc/exports: the access control list for filesystems which may be exported# 		to NFS clients.  See exports(5).# #  Example for NFSv2 and NFSv3:#  /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)# #  Example for NFSv4:#  /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)#  /srv/nfs4/ ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/hexo/post/c6aa/" title="Proxmox VE 安装群晖 6.2">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/proxmox-logo.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="Proxmox VE 安装群晖 6.2"></a></div><div class="recent-post-info"><a class="article-title" href="/hexo/post/c6aa/" title="Proxmox VE 安装群晖 6.2">Proxmox VE 安装群晖 6.2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-03-14T22:01:00.000Z" title="发表于 2020-03-15 06:01:00">2020-03-15</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/hexo/categories/Archives/">Archives</a></span></div><div class="content">新建 PVE 虚拟机，修改网卡为 E1000e。群晖 6.2 以上版本，启动后找不到服务器。原因是群晖不识别 PVE 虚拟机的 E1000 网卡，将网卡修改为 E1000e 即可找到服务器进入安装程序。
 
-<div class="post">
-    <a href="/2020/03/15/Proxmox-VE-%E5%AE%89%E8%A3%85%E7%BE%A4%E6%99%96-6.2/" title="Proxmox VE 安装群晖 6.2">
-	
-        <img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/thumbs/25.jpg" class="cover" width="680" height="440">
-	
-    </a>
-    <div class="else">
-        <p>三月 15, 2020</p>
-        <h3><a href="/2020/03/15/Proxmox-VE-%E5%AE%89%E8%A3%85%E7%BE%A4%E6%99%96-6.2/" title="Proxmox VE 安装群晖 6.2" class="posttitle">Proxmox VE 安装群晖 6.2</a></h3>
-        <p>新建 PVE 虚拟机，修改网卡为 E1000e。群晖 6.2 以上版本，启动后找不到服务器。原因是群晖不识别 PVE 虚拟机的 E1000 网卡，将网卡修...</p>
-    </div>
-</div>
+新建虚拟机网卡必须选择E1000。虚拟机不需要启动。
 
-
-    </div>
-    
-    <div id="pager"><a href="/page/2/" class="more">加载更多</a></div>
-    
-</div>
-<div id="preview"></div>
-
-	<center><a rel="nofollow" style="color: #666;" href="https://beian.miit.gov.cn" target="_blank">渝ICP备19007019号</a></center>
-
-
-
-</body>
-
-
-<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
-<script src="/js/plugin.js"></script>
-<script src="/js/typed.js"></script>
-<script src="/js/diaspora.js"></script>
-
-
-<link rel="stylesheet" href="/photoswipe/photoswipe.css">
-<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
-
-
-<script src="/photoswipe/photoswipe.min.js"></script>
-<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
-
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-            <div class="pswp__top-bar">
-                <!--  Controls are self-explanatory. Order can be changed. -->
-                <div class="pswp__counter"></div>
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
-                    </div>
-                </div>
+修改建好的虚拟机网卡步骤如下：
+获取网卡配置参数101为虚拟机id，根据自己实际情况修改
+1qm showcmd 101
+记录输出值，只需要注意最后一个 -netdev 开始的字段。输出值如下所示：
+1/usr/bin/kvm -id 101 -name DS3617xs ...这里省略N个字符... -netdev &#x27;type=tap,id=net0,ifname=tap101i0,script=/var/lib/qemu-server/pve-bridge,downscript=/var/lib/qemu-server/pve-bridgedown&#x27; -device &#x27;e1000,mac=00:11:32:33:44:55,netdev=net0,bus=pci.0,addr=0x12,id=n ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/hexo/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/hexo/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/avatar.png" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">樵子</div><div class="author-info__description">Always CREATIVE.</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/hexo/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div><div class="card-info-data-item is-center"><a href="/hexo/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div><div class="card-info-data-item is-center"><a href="/hexo/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/acmeist"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/acmeist" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:huweighost@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/hexo/atom.xml" target="_blank" title="Rss"><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">感謝訪問本站，若喜歡請收藏 ^_^</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/hexo/post/ea01/" title="CentOS 8 安装 Docker-CE"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/centos-logo-horizontal.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="CentOS 8 安装 Docker-CE"/></a><div class="content"><a class="title" href="/hexo/post/ea01/" title="CentOS 8 安装 Docker-CE">CentOS 8 安装 Docker-CE</a><time datetime="2021-03-22T18:24:00.000Z" title="发表于 2021-03-23 02:24:00">2021-03-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/hexo/post/862b/" title="Proxmox VE 6.2 国内源设置"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/proxmox-logo.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="Proxmox VE 6.2 国内源设置"/></a><div class="content"><a class="title" href="/hexo/post/862b/" title="Proxmox VE 6.2 国内源设置">Proxmox VE 6.2 国内源设置</a><time datetime="2020-06-01T08:18:00.000Z" title="发表于 2020-06-01 16:18:00">2020-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/hexo/post/def6/" title="使用 Windows 自带的远程桌面 mstsc 连接 CentOS 8"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/centos-logo-horizontal.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="使用 Windows 自带的远程桌面 mstsc 连接 CentOS 8"/></a><div class="content"><a class="title" href="/hexo/post/def6/" title="使用 Windows 自带的远程桌面 mstsc 连接 CentOS 8">使用 Windows 自带的远程桌面 mstsc 连接 CentOS 8</a><time datetime="2020-05-09T01:43:00.000Z" title="发表于 2020-05-09 09:43:00">2020-05-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/hexo/post/f10f/" title="给 Docker 中的 PHP 安装 GD 扩展"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/docker-logo-horizontal.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="给 Docker 中的 PHP 安装 GD 扩展"/></a><div class="content"><a class="title" href="/hexo/post/f10f/" title="给 Docker 中的 PHP 安装 GD 扩展">给 Docker 中的 PHP 安装 GD 扩展</a><time datetime="2020-03-25T05:28:00.000Z" title="发表于 2020-03-25 13:28:00">2020-03-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/hexo/post/6f9d/" title="Docker 搭建 DNMP 环境"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/docker-logo-horizontal.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="Docker 搭建 DNMP 环境"/></a><div class="content"><a class="title" href="/hexo/post/6f9d/" title="Docker 搭建 DNMP 环境">Docker 搭建 DNMP 环境</a><time datetime="2020-03-22T08:13:00.000Z" title="发表于 2020-03-22 16:13:00">2020-03-22</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
             </div>
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
-            </div>
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-        </div>
-    </div>
-</div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/hexo/categories/Archives/"><span class="card-category-list-name">Archives</span><span class="card-category-list-count">18</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/hexo/tags/Apache/" style="font-size: 1.1em; color: #999">Apache</a> <a href="/hexo/tags/CentOS/" style="font-size: 1.5em; color: #99a9bf">CentOS</a> <a href="/hexo/tags/Compute-Engine/" style="font-size: 1.1em; color: #999">Compute Engine</a> <a href="/hexo/tags/Debian/" style="font-size: 1.42em; color: #99a6b7">Debian</a> <a href="/hexo/tags/Docker/" style="font-size: 1.34em; color: #99a3b0">Docker</a> <a href="/hexo/tags/Google-Cloud/" style="font-size: 1.1em; color: #999">Google Cloud</a> <a href="/hexo/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/hexo/tags/MariaDB/" style="font-size: 1.26em; color: #999fa8">MariaDB</a> <a href="/hexo/tags/Nginx/" style="font-size: 1.18em; color: #999ca1">Nginx</a> <a href="/hexo/tags/PHP/" style="font-size: 1.34em; color: #99a3b0">PHP</a> <a href="/hexo/tags/Proxmox-VE/" style="font-size: 1.26em; color: #999fa8">Proxmox VE</a> <a href="/hexo/tags/Synology/" style="font-size: 1.1em; color: #999">Synology</a> <a href="/hexo/tags/WordPress/" style="font-size: 1.1em; color: #999">WordPress</a> <a href="/hexo/tags/phpMyAdmin/" style="font-size: 1.26em; color: #999fa8">phpMyAdmin</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/hexo/archives/2021/03/"><span class="card-archive-list-date">三月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/hexo/archives/2020/06/"><span class="card-archive-list-date">六月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/hexo/archives/2020/05/"><span class="card-archive-list-date">五月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/hexo/archives/2020/03/"><span class="card-archive-list-date">三月 2020</span><span class="card-archive-list-count">11</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/hexo/archives/2019/06/"><span class="card-archive-list-date">六月 2019</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/hexo/archives/2019/05/"><span class="card-archive-list-date">五月 2019</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">19</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2009-03-11T03:11:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">14.5k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-05-29T06:08:40.552Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 樵子</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img class="icp-icon" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/icp.png"><span>渝ICP备19007019号</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/hexo/js/utils.js"></script><script src="/hexo/js/main.js"></script><script src="/hexo/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/hexo/js/search/local-search.js"></script><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    var typed = new Typed("#subtitle", {
+      strings: "今日事&#44;今日畢,Never put off till tomorrow what you can do today".split(","),
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("subtitle").innerHTML = '今日事&#44;今日畢'
+  }
+}
 
-
-
-
-
-
-</html>
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
