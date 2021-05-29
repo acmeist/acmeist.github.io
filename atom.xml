@@ -487,15 +487,15 @@
     
     <category term="CentOS" scheme="https://www.aikiki.top/hexo/tags/CentOS/"/>
     
-    <category term="WordPress" scheme="https://www.aikiki.top/hexo/tags/WordPress/"/>
-    
-    <category term="Apache" scheme="https://www.aikiki.top/hexo/tags/Apache/"/>
-    
     <category term="MariaDB" scheme="https://www.aikiki.top/hexo/tags/MariaDB/"/>
     
     <category term="PHP" scheme="https://www.aikiki.top/hexo/tags/PHP/"/>
     
     <category term="phpMyAdmin" scheme="https://www.aikiki.top/hexo/tags/phpMyAdmin/"/>
+    
+    <category term="WordPress" scheme="https://www.aikiki.top/hexo/tags/WordPress/"/>
+    
+    <category term="Apache" scheme="https://www.aikiki.top/hexo/tags/Apache/"/>
     
   </entry>
   
