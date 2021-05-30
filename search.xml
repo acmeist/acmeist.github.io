@@ -130,9 +130,9 @@
             
             <tag> phpMyAdmin </tag>
             
-            <tag> Nginx </tag>
-            
             <tag> Docker </tag>
+            
+            <tag> Nginx </tag>
             
         </tags>
       
@@ -157,9 +157,9 @@
       
         <tags>
             
-            <tag> Debian </tag>
-            
             <tag> Docker </tag>
+            
+            <tag> Debian </tag>
             
         </tags>
       
