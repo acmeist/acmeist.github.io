@@ -6,7 +6,7 @@
   <link href="https://www.aikiki.top/atom.xml" rel="self"/>
   
   <link href="https://www.aikiki.top/"/>
-  <updated>2021-06-08T03:34:40.908Z</updated>
+  <updated>2021-06-09T06:26:24.204Z</updated>
   <id>https://www.aikiki.top/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CentOS 8 虚拟机设置网卡</title>
+    <link href="https://www.aikiki.top/post/bca67d44/"/>
+    <id>https://www.aikiki.top/post/bca67d44/</id>
+    <published>2021-06-09T06:07:00.000Z</published>
+    <updated>2021-06-09T06:26:24.204Z</updated>
+    
+    <content type="html"><![CDATA[<p>CentOS 8 在虚拟机新增加的网卡，不会生成网卡配置文件。 </p><p>这是因为从该版本开始，CentOS 停止了 network.service，只能通过 <code>NetworkManager</code> 进行网络配置。</p><h1 id="启动-NetworkManager"><a href="#启动-NetworkManager" class="headerlink" title="启动 NetworkManager"></a>启动 NetworkManager</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start NetworkManager</span><br></pre></td></tr></table></figure><h1 id="获取网卡名称"><a href="#获取网卡名称" class="headerlink" title="获取网卡名称"></a>获取网卡名称</h1><p>输入指令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli device </span><br></pre></td></tr></table></figure><p>系统显示：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DEVICE  TYPE      STATE   CONNECTION</span><br><span class="line">ens35   ethernet  已连接  ens35</span><br><span class="line">lo      loopback  未托管  --</span><br></pre></td></tr></table></figure><blockquote><p><code>ens35</code> 即为网卡设备名称。这里因为已经连接设备，所以后面的状态显示为<code>已连接</code>。</p></blockquote><h1 id="连接网卡设备"><a href="#连接网卡设备" class="headerlink" title="连接网卡设备"></a>连接网卡设备</h1><p>输入以下指令连接设备。 </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection add con-name newDevice1 ifname ens35 type ethernet</span><br></pre></td></tr></table></figure><blockquote><p><code>newDevice1</code> 为要连接设备的新名称。</p></blockquote><p>设备链接成功，在文件夹：<code>/etc/sysconfig/network-scripts/</code> 会自动生成配置文件并激活网卡。</p><h1 id="获取-ip-地址"><a href="#获取-ip-地址" class="headerlink" title="获取 ip 地址"></a>获取 ip 地址</h1><p>输入指令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr</span><br></pre></td></tr></table></figure><p>系统显示：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: ens35: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000</span><br><span class="line">    link/ether 00:50:56:bf:29:03 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.42.216/24 brd 192.168.42.255 scope global dynamic noprefixroute ens35</span><br><span class="line">       valid_lft 85409sec preferred_lft 85409sec</span><br><span class="line">    inet6 fe80::9cbf:de1b:fe75:81b9/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure><p>从上面的显示可以看出设备 ens35 获取 ip 成功。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;CentOS 8 在虚拟机新增加的网卡，不会生成网卡配置文件。 &lt;/p&gt;
+&lt;p&gt;这是因为从该版本开始，CentOS 停止了 network.service，只能通过 &lt;code&gt;NetworkManager&lt;/code&gt; 进行网络配置。&lt;/p&gt;
+&lt;h1 id=&quot;启动-Net</summary>
+      
+    
+    
+    
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
+    
+    
+    <category term="CentOS" scheme="https://www.aikiki.top/tags/CentOS/"/>
+    
+  </entry>
   
   <entry>
     <title>CentOS 8 时间同步</title>
@@ -176,9 +202,9 @@
     
     <category term="phpMyAdmin" scheme="https://www.aikiki.top/tags/phpMyAdmin/"/>
     
-    <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
-    
     <category term="Nginx" scheme="https://www.aikiki.top/tags/Nginx/"/>
+    
+    <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
     
   </entry>
   
@@ -523,26 +549,6 @@
     <category term="PHP" scheme="https://www.aikiki.top/tags/PHP/"/>
     
     <category term="phpMyAdmin" scheme="https://www.aikiki.top/tags/phpMyAdmin/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://www.aikiki.top/post/3eeb/"/>
-    <id>https://www.aikiki.top/post/3eeb/</id>
-    <published>2019-05-09T18:24:00.000Z</published>
-    <updated>2021-05-29T06:06:51.649Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
-      
-    
-    
-    
     
   </entry>
   
