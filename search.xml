@@ -259,9 +259,9 @@
             
             <tag> phpMyAdmin </tag>
             
-            <tag> Nginx </tag>
-            
             <tag> Docker </tag>
+            
+            <tag> Nginx </tag>
             
         </tags>
       
@@ -604,15 +604,15 @@
             
             <tag> CentOS </tag>
             
+            <tag> WordPress </tag>
+            
+            <tag> Apache </tag>
+            
             <tag> MariaDB </tag>
             
             <tag> PHP </tag>
             
             <tag> phpMyAdmin </tag>
-            
-            <tag> WordPress </tag>
-            
-            <tag> Apache </tag>
             
         </tags>
       
