@@ -6,7 +6,7 @@
   <link href="https://www.aikiki.top/atom.xml" rel="self"/>
   
   <link href="https://www.aikiki.top/"/>
-  <updated>2021-07-18T01:56:05.000Z</updated>
+  <updated>2023-11-15T01:49:31.429Z</updated>
   <id>https://www.aikiki.top/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OpenWrt 更新所有已安装软件包</title>
+    <link href="https://www.aikiki.top/post/53a7/"/>
+    <id>https://www.aikiki.top/post/53a7/</id>
+    <published>2023-11-15T01:38:00.000Z</published>
+    <updated>2023-11-15T01:49:31.429Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="登录SSH"><a href="#登录SSH" class="headerlink" title="登录SSH"></a>登录SSH</h1><h1 id="更新软件列表"><a href="#更新软件列表" class="headerlink" title="更新软件列表"></a>更新软件列表</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br></pre></td></tr></table></figure><h1 id="更新所有软件包"><a href="#更新所有软件包" class="headerlink" title="更新所有软件包"></a>更新所有软件包</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg list-upgradable | <span class="built_in">cut</span> -f 1 -d <span class="string">&#x27; &#x27;</span> | xargs opkg upgrade</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;登录SSH&quot;&gt;&lt;a href=&quot;#登录SSH&quot; class=&quot;headerlink&quot; title=&quot;登录SSH&quot;&gt;&lt;/a&gt;登录SSH&lt;/h1&gt;&lt;h1 id=&quot;更新软件列表&quot;&gt;&lt;a href=&quot;#更新软件列表&quot; class=&quot;headerlink&quot; title=&quot;更</summary>
+      
+    
+    
+    
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
+    
+    
+    <category term="OpenWrt" scheme="https://www.aikiki.top/tags/OpenWrt/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker-操作指令收集</title>
@@ -279,9 +303,9 @@
     
     <category term="phpMyAdmin" scheme="https://www.aikiki.top/tags/phpMyAdmin/"/>
     
-    <category term="Nginx" scheme="https://www.aikiki.top/tags/Nginx/"/>
-    
     <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
+    
+    <category term="Nginx" scheme="https://www.aikiki.top/tags/Nginx/"/>
     
   </entry>
   
@@ -506,31 +530,6 @@
     
     
     <category term="Proxmox VE" scheme="https://www.aikiki.top/tags/Proxmox-VE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用 Windows 自带的远程桌面 mstsc 连接 CentOS 7</title>
-    <link href="https://www.aikiki.top/post/dab6/"/>
-    <id>https://www.aikiki.top/post/dab6/</id>
-    <published>2019-06-19T22:12:00.000Z</published>
-    <updated>2021-05-29T06:06:51.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>连接 CentOS 7 的方案有很多，但大都要安装客户端软件，且用户体验并不算太好，配置也比较麻烦。希望找到一个配置简单，连接方便的解决方案。能使用 Windows 系统自带的远程桌面最好，因此选用了 XRDP 服务。</p><h1 id="安装-XRDP"><a href="#安装-XRDP" class="headerlink" title="安装 XRDP"></a>安装 XRDP</h1><h2 id="切换为-root-用户："><a href="#切换为-root-用户：" class="headerlink" title="切换为 root 用户："></a>切换为 root 用户：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su - root</span><br></pre></td></tr></table></figure><h2 id="安装-epel-库"><a href="#安装-epel-库" class="headerlink" title="安装 epel 库"></a>安装 epel 库</h2><p>查询是否已经安装 epel 库:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa|grep epel</span><br></pre></td></tr></table></figure><p>如果 epel 库没有安装，则安装它：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release</span><br></pre></td></tr></table></figure><h2 id="安装-XRDP-1"><a href="#安装-XRDP-1" class="headerlink" title="安装 XRDP"></a>安装 XRDP</h2><p>安装 xrdp 服务：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install xrdp</span><br></pre></td></tr></table></figure><h2 id="安装-VNC"><a href="#安装-VNC" class="headerlink" title="安装 VNC"></a>安装 VNC</h2><p>xrdp 需要调用 VNC 服务，所以必须安装 tigervnc-server，否则 xrdp 无法使用。<br>安装vnc：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install tigervnc-server</span><br></pre></td></tr></table></figure><h1 id="设置-XRDP"><a href="#设置-XRDP" class="headerlink" title="设置 XRDP"></a>设置 XRDP</h1><h2 id="设置-VNC-密码"><a href="#设置-VNC-密码" class="headerlink" title="设置 VNC 密码"></a>设置 VNC 密码</h2><p>为 root 用户设置 VNC 密码：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vncpasswd root</span><br></pre></td></tr></table></figure><blockquote><p>如需设置其它用户，修改 <code>root</code> 为要设置的用户名即可。</p></blockquote><h2 id="配置-XRDP"><a href="#配置-XRDP" class="headerlink" title="配置 XRDP"></a>配置 XRDP</h2><p>修改 xrdp 最大连接数（使用默认值，不修改也是可以的） ：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/xrdp/xrdp.ini </span><br></pre></td></tr></table></figure><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//默认是32：</span><br><span class="line"><span class="attr">max_bpp</span>=<span class="number">32</span></span><br></pre></td></tr></table></figure><h1 id="启动-XRDP"><a href="#启动-XRDP" class="headerlink" title="启动 XRDP"></a>启动 XRDP</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//启动 xrdp 服务：</span><br><span class="line">systemctl start xrdp</span><br><span class="line">//设置 xrdp 服务开机自启动：</span><br><span class="line">systemctl <span class="built_in">enable</span> xrdp</span><br></pre></td></tr></table></figure><h1 id="设置防火墙"><a href="#设置防火墙" class="headerlink" title="设置防火墙"></a>设置防火墙</h1><h2 id="开放端口-3389"><a href="#开放端口-3389" class="headerlink" title="开放端口 3389"></a>开放端口 3389</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//开启 3389 端口</span><br><span class="line">firewall-cmd --zone=public --add-port=3389 /tcp --permanent</span><br><span class="line">//重启防火墙</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure><p>重启防火墙后，查看已开放的端口可以看见 3389 端口已经开启。</p><h2 id="关闭-SELinux"><a href="#关闭-SELinux" class="headerlink" title="关闭 SELinux"></a>关闭 SELinux</h2><p>SELinux 应该关闭它。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//查看 SELinux 状态：</span><br><span class="line">sestatus </span><br><span class="line"></span><br><span class="line">//临时关闭 SELinux：</span><br><span class="line">setenforce 0</span><br></pre></td></tr></table></figure><p>不过，我们要永久关闭 SELinux：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/selinux/config</span><br></pre></td></tr></table></figure><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 设置 SELinux 关闭</span><br><span class="line"><span class="attr">SELINUX</span>=disabled</span><br></pre></td></tr></table></figure><h1 id="其它连接方式"><a href="#其它连接方式" class="headerlink" title="其它连接方式"></a>其它连接方式</h1><p>MobaXterm 是一个支持 rdp 协议的远程桌面软件，相当于 Windows 自带的远程桌面软件 mstsc。<br>使用 MobaXterm 替代 mstsc 的好处是可以进行<code>粘贴复制</code> 操作。也就是 Windows 复制，直接可以粘贴到 CentOS 上，或者 CentOS 复制直接粘贴到 Windows 上。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;连接 CentOS 7 的方案有很多，但大都要安装客户端软件，且用户体验并不算太好，配置也比较麻烦。希望找到一个配置简单，连接方便的解决方案。能使用 Windows 系统自带的远程桌面最好，因此选用了 XRDP 服务。&lt;/p&gt;
-&lt;h1 id=&quot;安装-XRDP&quot;&gt;&lt;a hre</summary>
-      
-    
-    
-    
-    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
-    
-    
-    <category term="CentOS" scheme="https://www.aikiki.top/tags/CentOS/"/>
     
   </entry>
   
