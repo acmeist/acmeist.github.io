@@ -336,9 +336,9 @@
     <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Debian" scheme="https://www.aikiki.top/tags/Debian/"/>
-    
     <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
+    
+    <category term="Debian" scheme="https://www.aikiki.top/tags/Debian/"/>
     
   </entry>
   
