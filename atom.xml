@@ -6,7 +6,7 @@
   <link href="https://www.aikiki.top/atom.xml" rel="self"/>
   
   <link href="https://www.aikiki.top/"/>
-  <updated>2023-11-16T08:34:58.000Z</updated>
+  <updated>2023-11-17T08:30:17.488Z</updated>
   <id>https://www.aikiki.top/</id>
   
   <author>
@@ -21,17 +21,15 @@
     <link href="https://www.aikiki.top/post/53a7/"/>
     <id>https://www.aikiki.top/post/53a7/</id>
     <published>2023-11-15T01:38:00.000Z</published>
-    <updated>2023-11-16T08:34:58.000Z</updated>
+    <updated>2023-11-17T08:30:17.488Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="登录-SSH"><a href="#登录-SSH" class="headerlink" title="登录 SSH"></a>登录 SSH</h1><blockquote><p>使用任意 SSH 软件登录 OpenWrt。</p></blockquote><h1 id="更新软件列表"><a href="#更新软件列表" class="headerlink" title="更新软件列表"></a>更新软件列表</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br></pre></td></tr></table></figure><h1 id="更新所有软件包"><a href="#更新所有软件包" class="headerlink" title="更新所有软件包"></a>更新所有软件包</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg list-upgradable | <span class="built_in">cut</span> -f 1 -d <span class="string">&#x27; &#x27;</span> | xargs opkg upgrade</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p><img src="https://gitee.com/acmeist/img/raw/master/img/2023/11/202311171628903.png" alt="image.png"></p><h1 id="登录-SSH"><a href="#登录-SSH" class="headerlink" title="登录 SSH"></a>登录 SSH</h1><blockquote><p>使用任意 SSH 软件登录 OpenWrt。</p></blockquote><h1 id="更新软件列表"><a href="#更新软件列表" class="headerlink" title="更新软件列表"></a>更新软件列表</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br></pre></td></tr></table></figure><h1 id="更新所有软件包"><a href="#更新所有软件包" class="headerlink" title="更新所有软件包"></a>更新所有软件包</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg list-upgradable | <span class="built_in">cut</span> -f 1 -d <span class="string">&#x27; &#x27;</span> | xargs opkg upgrade</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;登录-SSH&quot;&gt;&lt;a href=&quot;#登录-SSH&quot; class=&quot;headerlink&quot; title=&quot;登录 SSH&quot;&gt;&lt;/a&gt;登录 SSH&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;使用任意 SSH 软件登录 OpenWrt。&lt;/p&gt;
-&lt;/blockquote&gt;
-</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://gitee.com/acmeist/img/raw/master/img/2023/11/202311171628903.png&quot; alt=&quot;image.png&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;登录-SSH&quot;&gt;&lt;a href=&quot;#登录-SSH</summary>
       
     
     
