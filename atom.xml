@@ -276,9 +276,9 @@
     <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
-    
     <category term="PHP" scheme="https://www.aikiki.top/tags/PHP/"/>
+    
+    <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
     
   </entry>
   
@@ -303,8 +303,6 @@
     <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
-    
     <category term="MariaDB" scheme="https://www.aikiki.top/tags/MariaDB/"/>
     
     <category term="PHP" scheme="https://www.aikiki.top/tags/PHP/"/>
@@ -312,6 +310,8 @@
     <category term="phpMyAdmin" scheme="https://www.aikiki.top/tags/phpMyAdmin/"/>
     
     <category term="Nginx" scheme="https://www.aikiki.top/tags/Nginx/"/>
+    
+    <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
     
   </entry>
   
