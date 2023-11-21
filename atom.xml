@@ -6,7 +6,7 @@
   <link href="https://www.aikiki.top/atom.xml" rel="self"/>
   
   <link href="https://www.aikiki.top/"/>
-  <updated>2023-11-21T01:10:02.947Z</updated>
+  <updated>2023-11-21T03:23:36.471Z</updated>
   <id>https://www.aikiki.top/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OpenWrt 安装自带 Tailscale 和 ZeroTier</title>
+    <link href="https://www.aikiki.top/post/bf0c/"/>
+    <id>https://www.aikiki.top/post/bf0c/</id>
+    <published>2023-11-21T01:19:00.000Z</published>
+    <updated>2023-11-21T03:23:36.471Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="官方网站"><a href="#官方网站" class="headerlink" title="官方网站"></a>官方网站</h1><ul><li><a href="https://openwrt.ai/">OpenWrt 软路由固件下载与在线定制编译</a></li><li><a href="https://tailscale.com/">Tailscale · Best VPN Service for Secure Networks</a></li><li><a href="https://www.zerotier.com/">ZeroTier | Global Area Networking</a></li></ul><blockquote><p>OpenWrt 的安装、Tailscale 和 ZeroTier 使用方法参见网上教程。</p></blockquote><h1 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h1><p>既然是安装系统自带包，使用 OpenWrt 的软件包功能安装即可。<br>安装前先<code>更新列表...</code>。</p><h2 id="安装-Tailscale"><a href="#安装-Tailscale" class="headerlink" title="安装 Tailscale"></a>安装 Tailscale</h2><ul><li>OpenWrt 22.03.x 以上版本需要安装包 <code>iptables-nft</code>，直接搜索该名称安装。</li><li>tailscale 安装搜索名称安装即可，系统会安装 <code>tailscale</code> 和 <code>tailscaled</code>。</li><li>安装完成后一定要重启。</li></ul><p>卸载后的<code>清理</code>，推荐使用卸载脚本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --tries=5 -c -t 60 -O- https://gh.api.99988866.xyz/https://raw.githubusercontent.com/CH3NGYZ/tailscale-openwrt/chinese_mainland/uninstall.sh | sh</span><br></pre></td></tr></table></figure><p><em>ps：此脚本来源于 tailscale 的另外一种安装方法：</em><a href="https://github.com/CH3NGYZ/tailscale-openwrt">CH3NGYZ&#x2F;tailscale-openwrt: 在 openwrt 上最简单的 tailscale 部署方法 (github.com)</a></p><h2 id="安装-ZeroTier"><a href="#安装-ZeroTier" class="headerlink" title="安装 ZeroTier"></a>安装 ZeroTier</h2><p>OpenWrt 自带的 zerotier 提供了配置界面，搜索 <code>luci-app-zerotier</code> 安装即可，系统会自动安装 <code>luci-app-zerotier</code> 和 <code>zerotier</code>。<br>ZeroTier 安装完成后会再管理菜单中出现 <code>VPN-ZeroTier</code> 的菜单选项。</p><h1 id="设置防火墙"><a href="#设置防火墙" class="headerlink" title="设置防火墙"></a>设置防火墙</h1><p>Tailscale 和 ZeroTier 设置防火墙的方法是一样的，这里以 Tailscale 为例。</p><h2 id="添加新接口"><a href="#添加新接口" class="headerlink" title="添加新接口"></a>添加新接口</h2><p>打开<code>网络-接口</code>菜单，点击页面下方的<code>添加新接口...</code>。<br>输入接口名称和选择设备，完成后点击<code>创建接口</code>。</p><p><img src="https://gitee.com/acmeist/img/raw/master/hexo/2023/11/202311211045958.png" alt="添加新接口"></p><blockquote><p>Tailscale 设备名称是：tailscale0。<br>ZeroTier 设备名称以 <code>zt</code> 开头，后面是加入网络产生的代码编号。例如：ztfp6baqxy。<br>设备名称后面的 <code>(tailscale)</code> 表示该设备已被名称为 <code>tailscale</code> 的接口使用。</p></blockquote><h2 id="设置防火墙-1"><a href="#设置防火墙-1" class="headerlink" title="设置防火墙"></a>设置防火墙</h2><h3 id="添加区域"><a href="#添加区域" class="headerlink" title="添加区域"></a>添加区域</h3><p>打开<code>网络-防火墙</code>菜单，在<code>常规设置</code>下方的<code>区域</code>点击<code>添加</code>。<br>按下图设置完成后，点击<code>保存</code>。</p><p><img src="https://gitee.com/acmeist/img/raw/master/hexo/2023/11/202311211101580.png" alt="添加区域"></p><h3 id="设置转发规则"><a href="#设置转发规则" class="headerlink" title="设置转发规则"></a>设置转发规则</h3><p>打开<code>网络-防火墙</code>菜单，在<code>自定义规则</code>下方输入以下规则。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -I FORWARD -i tailscale0 -j ACCEPT</span><br><span class="line">iptables -I FORWARD -o tailscale0 -j ACCEPT</span><br><span class="line">iptables -t nat -I POSTROUTING -o tailscale0 -j MASQUERADE</span><br></pre></td></tr></table></figure><p>输入完成后，点击<code>保存</code>。</p><blockquote><p>注意规则中的 <code>tailscale0</code> 是设备名称，注意替换（3处）。<br>关于设备名称参见前文：添加新接口。</p></blockquote><h2 id="重新启动"><a href="#重新启动" class="headerlink" title="重新启动"></a>重新启动</h2><blockquote><p>防火墙设置完成后建议重启设备，避免出现不可预料的问题。</p></blockquote><h1 id="加入到网络"><a href="#加入到网络" class="headerlink" title="加入到网络"></a>加入到网络</h1><h2 id="Tailscale"><a href="#Tailscale" class="headerlink" title="Tailscale"></a>Tailscale</h2><p>SSH 登录控制台，输入以下指令加入网络：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tailscale up --advertise-routes=192.168.1.0/24 --accept-routes=<span class="literal">true</span> --accept-dns=<span class="literal">false</span></span><br></pre></td></tr></table></figure><blockquote><p>192.168.1.0&#x2F;24 为 OpenWrt 所在子网的网段。此参数开启后，允许通过 Tailscale 访问该子网。<br>更多设置登录管理端：<a href="https://tailscale.com/">Tailscale · Best VPN Service for Secure Networks</a></p></blockquote><h2 id="ZeroTier"><a href="#ZeroTier" class="headerlink" title="ZeroTier"></a>ZeroTier</h2><p>打开 <code>VPN-ZeroTier</code> 页面，在下方输入要加入的 <code>网络 ID</code> 即可。<br>更多设置登录管理端：<a href="https://www.zerotier.com/">ZeroTier | Global Area Networking</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;官方网站&quot;&gt;&lt;a href=&quot;#官方网站&quot; class=&quot;headerlink&quot; title=&quot;官方网站&quot;&gt;&lt;/a&gt;官方网站&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://openwrt.ai/&quot;&gt;OpenWrt 软路由固件下载与在线定制编译&lt;/a&gt;</summary>
+      
+    
+    
+    
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
+    
+    
+    <category term="OpenWrt" scheme="https://www.aikiki.top/tags/OpenWrt/"/>
+    
+    <category term="Tailscale" scheme="https://www.aikiki.top/tags/Tailscale/"/>
+    
+    <category term="ZeroTier" scheme="https://www.aikiki.top/tags/ZeroTier/"/>
+    
+  </entry>
   
   <entry>
     <title>OpenWrt 更新所有已安装软件包</title>
@@ -513,30 +542,6 @@
     
     
     <category term="CentOS" scheme="https://www.aikiki.top/tags/CentOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>六句命令解决 Proxmox VE 更新慢的问题</title>
-    <link href="https://www.aikiki.top/post/345d/"/>
-    <id>https://www.aikiki.top/post/345d/</id>
-    <published>2020-03-13T04:17:00.000Z</published>
-    <updated>2023-11-16T08:34:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> /etc/apt/sources.list.d/pve-enterprise.list</span><br><span class="line"></span><br><span class="line">wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-ve-release-5.x.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-5.x.gpg</span><br><span class="line"></span><br><span class="line">wget http://mirrors.ustc.edu.cn/proxmox/debian/proxmox-ve-release-6.x.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-6.x.gpg</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;deb http://mirrors.ustc.edu.cn/proxmox/debian buster pve-no-subscription&#x27;</span>&gt;/etc/apt/sources.list.d/pve-install-repo.list</span><br><span class="line"></span><br><span class="line">sed -i <span class="string">&#x27;s/ftp.debian.org/mirrors.163.com/g&#x27;</span> /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line">sed -i <span class="string">&#x27;s/security.debian.org/mirrors.163.com\/debian-security/g&#x27;</span> /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line">apt update</span><br><span class="line">apt dist-upgrade</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=</summary>
-      
-    
-    
-    
-    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
-    
-    
-    <category term="Proxmox VE" scheme="https://www.aikiki.top/tags/Proxmox-VE/"/>
     
   </entry>
   
