@@ -40,11 +40,11 @@ https://www.aikiki.top/tags/Nginx/
 https://www.aikiki.top/tags/Google-Cloud/
 https://www.aikiki.top/tags/Compute-Engine/
 https://www.aikiki.top/tags/Docker/
-https://www.aikiki.top/tags/Rocky-Linux/
 https://www.aikiki.top/tags/Cockpit/
+https://www.aikiki.top/tags/Rocky-Linux/
 https://www.aikiki.top/tags/Proxmox-VE/
-https://www.aikiki.top/tags/Debian/
 https://www.aikiki.top/tags/Linux/
+https://www.aikiki.top/tags/Debian/
 https://www.aikiki.top/tags/Synology/
 https://www.aikiki.top/tags/OpenWrt/
 https://www.aikiki.top/tags/Tailscale/
