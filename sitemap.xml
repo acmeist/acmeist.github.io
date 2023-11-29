@@ -2,9 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.aikiki.top/post/0/</loc>
+    
+    <lastmod>2023-11-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.aikiki.top/post/9973/</loc>
     
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -47,7 +56,7 @@
   </url>
   
   <url>
-    <loc>https://www.aikiki.top/post/ea01/</loc>
+    <loc>https://www.aikiki.top/post/a3e5/</loc>
     
     <lastmod>2023-11-16</lastmod>
     
@@ -56,7 +65,7 @@
   </url>
   
   <url>
-    <loc>https://www.aikiki.top/post/a3e5/</loc>
+    <loc>https://www.aikiki.top/post/ea01/</loc>
     
     <lastmod>2023-11-16</lastmod>
     
@@ -283,7 +292,7 @@
 
   <url>
     <loc>https://www.aikiki.top/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -291,140 +300,140 @@
   
   <url>
     <loc>https://www.aikiki.top/tags/CentOS/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/WordPress/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/Apache/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/MariaDB/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/PHP/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/phpMyAdmin/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/Nginx/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/Google-Cloud/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/Compute-Engine/</loc>
-    <lastmod>2023-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aikiki.top/tags/Docker/</loc>
-    <lastmod>2023-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aikiki.top/tags/Cockpit/</loc>
-    <lastmod>2023-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aikiki.top/tags/Rocky-Linux/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/Proxmox-VE/</loc>
-    <lastmod>2023-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aikiki.top/tags/Linux/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/Debian/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aikiki.top/tags/Linux/</loc>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/Synology/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aikiki.top/tags/Docker/</loc>
+    <lastmod>2023-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aikiki.top/tags/Rocky-Linux/</loc>
+    <lastmod>2023-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aikiki.top/tags/Cockpit/</loc>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/OpenWrt/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/Tailscale/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/ZeroTier/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aikiki.top/tags/ESXi/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -433,7 +442,7 @@
   
   <url>
     <loc>https://www.aikiki.top/categories/Archives/</loc>
-    <lastmod>2023-11-25</lastmod>
+    <lastmod>2023-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
