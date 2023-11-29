@@ -6,7 +6,7 @@
   <link href="https://www.aikiki.top/atom.xml" rel="self"/>
   
   <link href="https://www.aikiki.top/"/>
-  <updated>2023-11-29T02:04:34.277Z</updated>
+  <updated>2023-11-29T02:05:53.488Z</updated>
   <id>https://www.aikiki.top/</id>
   
   <author>
@@ -21,17 +21,17 @@
     <link href="https://www.aikiki.top/post/1e36/"/>
     <id>https://www.aikiki.top/post/1e36/</id>
     <published>2023-11-29T01:45:00.000Z</published>
-    <updated>2023-11-29T02:04:34.277Z</updated>
+    <updated>2023-11-29T02:05:53.488Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>ESXi 主机通常不接显示器、键盘和鼠标，有时候需要登录显示器管理界面很不方便。ESXi 提供了远程 SSH 终端登录此管理界面的功能，即是指令 <code>dcui</code>。</p></blockquote><h1 id="开启-SSH"><a href="#开启-SSH" class="headerlink" title="开启 SSH"></a>开启 SSH</h1><p>在<code>主机</code>-<code>操作</code>-<code>服务</code>-<code>启用 Secure Shell (SSH)</code>。</p><h1 id="登录-SSH-终端"><a href="#登录-SSH-终端" class="headerlink" title="登录 SSH 终端"></a>登录 SSH 终端</h1><p>使用你喜欢的 SSH 软件登录 ESXi。</p><h1 id="登录显示器管理界面"><a href="#登录显示器管理界面" class="headerlink" title="登录显示器管理界面"></a>登录显示器管理界面</h1><p>在 SSH 终端输入以下代码进入显示器管理界面：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TERM=xterm</span><br><span class="line">dcui</span><br></pre></td></tr></table></figure><p><em>ps：TERM 为终端环境变量。可以不设置此变量，直接输入 <code>dcui</code> 进入显示器管理界面。</em></p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>ESXi 主机通常不接显示器、键盘和鼠标，有时候需要登录显示器管理界面很不方便。<br>ESXi 提供了远程 SSH 终端登录此管理界面的功能，即是指令 <code>dcui</code>。</p></blockquote><h1 id="开启-SSH"><a href="#开启-SSH" class="headerlink" title="开启 SSH"></a>开启 SSH</h1><p>在<code>主机</code>-<code>操作</code>-<code>服务</code>-<code>启用 Secure Shell (SSH)</code>。</p><h1 id="登录-SSH-终端"><a href="#登录-SSH-终端" class="headerlink" title="登录 SSH 终端"></a>登录 SSH 终端</h1><p>使用你喜欢的 SSH 软件登录 ESXi。</p><h1 id="登录显示器管理界面"><a href="#登录显示器管理界面" class="headerlink" title="登录显示器管理界面"></a>登录显示器管理界面</h1><p>在 SSH 终端输入以下代码进入显示器管理界面：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TERM=xterm</span><br><span class="line">dcui</span><br></pre></td></tr></table></figure><p><em>ps：TERM 为终端环境变量。可以不设置此变量，直接输入 <code>dcui</code> 进入显示器管理界面。</em></p>]]></content>
     
     
       
       
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;ESXi 主机通常不接显示器、键盘和鼠标，有时候需要登录显示器管理界面很不方便。ESXi 提供了远程 SSH 终端登录此管理界面的功能，即是指令 &lt;code&gt;dcui&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;ESXi 主机通常不接显示器、键盘和鼠标，有时候需要登录显示器管理界面很不方便。&lt;br&gt;ESXi 提供了远程 SSH 终端登录此管理界面的功能，即是指令 &lt;code&gt;dcui&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1 id=&quot;开启-SSH</summary>
+&lt;h1 id=&quot;开启</summary>
       
     
     
