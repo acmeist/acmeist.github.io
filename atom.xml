@@ -6,7 +6,7 @@
   <link href="https://www.aikiki.top/atom.xml" rel="self"/>
   
   <link href="https://www.aikiki.top/"/>
-  <updated>2023-11-29T02:05:53.488Z</updated>
+  <updated>2023-12-18T02:28:40.469Z</updated>
   <id>https://www.aikiki.top/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker 使用宿主机网段</title>
+    <link href="https://www.aikiki.top/post/c3b4/"/>
+    <id>https://www.aikiki.top/post/c3b4/</id>
+    <published>2023-12-18T01:27:00.000Z</published>
+    <updated>2023-12-18T02:28:40.469Z</updated>
+    
+    <content type="html"><![CDATA[<p>Docker 使用宿主机网段多是使用 MacVlan 创建虚拟网络实现。但是本人在 RockyLinux 9.3 测试结果不尽人意。主要问题是：<code>容器无法访问宿主机所在局域网网关和网段内的其它 IP 地址</code>。最后改用了 Docker 新的 IpVlan 驱动方式解决问题。</p><blockquote><p>IpVlan 和 MacVlan 使用方法基本一致，个别参数有差别，但基本上用不到。</p></blockquote><h1 id="创建-IpVlan-网络"><a href="#创建-IpVlan-网络" class="headerlink" title="创建 IpVlan 网络"></a>创建 IpVlan 网络</h1><p>创建 IpVlan 网络：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d ipvlan  --subnet=192.168.1.0/24 --gateway=192.168.1.1 --ipv6 --subnet=fd00:db8:1:ddee::/64 --gateway=fd00:db8:1:ddee::1 -o ipvlan_mode=l2 -o parent=ens192 ipv6ipvlan</span><br></pre></td></tr></table></figure><blockquote><p>参数说明：</p><ul><li>-d：创建网络的驱动方式为 ipvlan。</li><li>–subnet&#x3D;192.168.8.0&#x2F;24：ipv4 的网段为 192.168.1.0&#x2F;24（宿主机所在网段）。</li><li>–gateway&#x3D;192.168.1.1：ipv4 的网关为 192.168.1.1（宿主机网关）。</li><li>–ipv6：启用 ipv6。</li><li>–subnet&#x3D;fd00:db8:1:ddee::&#x2F;64：ipv6 的网段为 fd00:db8:1:ddee::&#x2F;64。</li><li>–gateway&#x3D;fd00:db8:1:ddee::1：ipv6 的网关为 gateway&#x3D;fd00:db8:1:ddee::1</li><li>-o ipvlan_mode&#x3D;l2：ipvlan 工作模式为 l2（默认就是 l2，可省略该参数）。</li><li>-o parent&#x3D;ens192：指定要使用的父接口（网卡名称）。</li><li>ipv6ipvlan：要创建的 Docker 网络名称。</li></ul></blockquote><h1 id="测试-IpVlan-网络"><a href="#测试-IpVlan-网络" class="headerlink" title="测试 IpVlan 网络"></a>测试 IpVlan 网络</h1><blockquote><p>ipvlan 使用了宿主机子网网段，建议在容器中指定 ip 地址。</p></blockquote><p>使用 centos 镜像测试：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 CentOS 镜像</span></span><br><span class="line">docker run --net=ipv6ipvlan --ip=192.168.1.10 --dns=192.168.1.1 --name=centos -itd centos /bin/bash</span><br><span class="line"><span class="comment"># 进入容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it centos /bin/bash</span><br><span class="line"><span class="comment"># ping 网关测试</span></span><br><span class="line">ping 192.168.1.1</span><br><span class="line"><span class="comment"># ping 其它子网测试</span></span><br><span class="line">ping 192.168.1.X</span><br><span class="line"><span class="comment"># ping 外网测试</span></span><br><span class="line">ping www.baidu.com</span><br><span class="line"><span class="comment"># 退出容器</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure><p>正常情况下，容器已经能 ping 通各个地址。<br>此时，在其它网络设备也能 ping 通测试容器的 ip 地址 <code>192.168.1.10</code>。</p><blockquote><p>注意：宿主机和容器之间不能 ping 通。</p></blockquote><h1 id="打通宿主机和容器之间的互访"><a href="#打通宿主机和容器之间的互访" class="headerlink" title="打通宿主机和容器之间的互访"></a>打通宿主机和容器之间的互访</h1><p>创建虚拟接口桥接到物理网卡打通宿主机和容器之间互访。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加一个虚拟接口桥接到物理网卡</span></span><br><span class="line">ip <span class="built_in">link</span> add ipvlan-proxy <span class="built_in">link</span> ens192 <span class="built_in">type</span> ipvlan</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给虚拟接口配置ip</span></span><br><span class="line">ip addr add 192.168.1.11/32 dev ipvlan-proxy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用虚拟接口</span></span><br><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> ipvlan-proxy up</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加需要访问的容器网络的静态路由规则</span></span><br><span class="line">ip route add 192.168.1.10/32 dev ipvlan-proxy</span><br></pre></td></tr></table></figure><blockquote><ul><li>ipvlan-proxy：虚拟接口名称。</li><li>ens192：物理网卡名称。</li><li>192.168.1.11&#x2F;32：给虚拟接口分配的 ip 地址。</li><li>192.168.1.10&#x2F;32：需互访的容器 ip 地址。</li></ul></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Docker 使用宿主机网段多是使用 MacVlan 创建虚拟网络实现。但是本人在 RockyLinux 9.3 测试结果不尽人意。主要问题是：&lt;code&gt;容器无法访问宿主机所在局域网网关和网段内的其它 IP 地址&lt;/code&gt;。最后改用了 Docker 新的 IpVlan</summary>
+      
+    
+    
+    
+    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
+    
+    
+    <category term="Docker IpVlan" scheme="https://www.aikiki.top/tags/Docker-IpVlan/"/>
+    
+  </entry>
   
   <entry>
     <title>ESXi 远程 SSH 终端登录显示器管理界面</title>
@@ -416,9 +440,9 @@
     <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Debian" scheme="https://www.aikiki.top/tags/Debian/"/>
-    
     <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
+    
+    <category term="Debian" scheme="https://www.aikiki.top/tags/Debian/"/>
     
   </entry>
   
@@ -517,31 +541,6 @@
     <category term="Proxmox VE" scheme="https://www.aikiki.top/tags/Proxmox-VE/"/>
     
     <category term="Synology" scheme="https://www.aikiki.top/tags/Synology/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux 系统让命令行提示符显示完整路径</title>
-    <link href="https://www.aikiki.top/post/fbba/"/>
-    <id>https://www.aikiki.top/post/fbba/</id>
-    <published>2020-03-14T04:05:00.000Z</published>
-    <updated>2023-11-16T08:34:55.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>编辑 <code>profile</code> 文件，添加环境变量 <code>PS1</code>。</p><h1 id="在-profile-文件下添加："><a href="#在-profile-文件下添加：" class="headerlink" title="在 profile 文件下添加："></a>在 <code>profile</code> 文件下添加：</h1><p>文件在 <code>etc</code> 目录下：&#x2F;etc&#x2F;profile</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PS1=<span class="string">&#x27;[\u@\h `pwd`]\$&#x27;</span></span><br></pre></td></tr></table></figure><h1 id="让-profile-文件生效："><a href="#让-profile-文件生效：" class="headerlink" title="让 profile 文件生效："></a>让 <code>profile</code> 文件生效：</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure><p>修改完成后，命令行提示变成：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[user@hostname /home/user]$</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;编辑 &lt;code&gt;profile&lt;/code&gt; 文件，添加环境变量 &lt;code&gt;PS1&lt;/code&gt;。&lt;/p&gt;
-&lt;h1 id=&quot;在-profile-文件下添加：&quot;&gt;&lt;a href=&quot;#在-profile-文件下添加：&quot; class=&quot;headerlink&quot; title=&quot;在</summary>
-      
-    
-    
-    
-    <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
-    
-    
-    <category term="Linux" scheme="https://www.aikiki.top/tags/Linux/"/>
     
   </entry>
   
