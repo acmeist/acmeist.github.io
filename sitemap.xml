@@ -315,6 +315,20 @@
   </url>
   
   <url>
+    <loc>https://www.aikiki.top/tags/WordPress/</loc>
+    <lastmod>2023-12-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aikiki.top/tags/Apache/</loc>
+    <lastmod>2023-12-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.aikiki.top/tags/MariaDB/</loc>
     <lastmod>2023-12-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -343,20 +357,6 @@
   </url>
   
   <url>
-    <loc>https://www.aikiki.top/tags/WordPress/</loc>
-    <lastmod>2023-12-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aikiki.top/tags/Apache/</loc>
-    <lastmod>2023-12-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.aikiki.top/tags/Google-Cloud/</loc>
     <lastmod>2023-12-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -378,14 +378,14 @@
   </url>
   
   <url>
-    <loc>https://www.aikiki.top/tags/Debian/</loc>
+    <loc>https://www.aikiki.top/tags/Linux/</loc>
     <lastmod>2023-12-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.aikiki.top/tags/Linux/</loc>
+    <loc>https://www.aikiki.top/tags/Debian/</loc>
     <lastmod>2023-12-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -448,7 +448,7 @@
   </url>
   
   <url>
-    <loc>https://www.aikiki.top/tags/Docker-IpVlan/</loc>
+    <loc>https://www.aikiki.top/tags/IpVlan/</loc>
     <lastmod>2023-12-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
