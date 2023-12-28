@@ -272,7 +272,7 @@
   </url>
   
   <url>
-    <loc>https://www.aikiki.top/categories/index.html</loc>
+    <loc>https://www.aikiki.top/link/index.html</loc>
     
     <lastmod>2020-03-21</lastmod>
     
@@ -281,7 +281,7 @@
   </url>
   
   <url>
-    <loc>https://www.aikiki.top/link/index.html</loc>
+    <loc>https://www.aikiki.top/categories/index.html</loc>
     
     <lastmod>2020-03-21</lastmod>
     
@@ -406,6 +406,13 @@
   </url>
   
   <url>
+    <loc>https://www.aikiki.top/tags/Rocky-Linux/</loc>
+    <lastmod>2023-12-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.aikiki.top/tags/Cockpit/</loc>
     <lastmod>2023-12-28</lastmod>
     <changefreq>weekly</changefreq>
@@ -420,20 +427,6 @@
   </url>
   
   <url>
-    <loc>https://www.aikiki.top/tags/Rocky-Linux/</loc>
-    <lastmod>2023-12-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aikiki.top/tags/ESXi/</loc>
-    <lastmod>2023-12-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.aikiki.top/tags/Tailscale/</loc>
     <lastmod>2023-12-28</lastmod>
     <changefreq>weekly</changefreq>
@@ -442,6 +435,13 @@
   
   <url>
     <loc>https://www.aikiki.top/tags/ZeroTier/</loc>
+    <lastmod>2023-12-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aikiki.top/tags/ESXi/</loc>
     <lastmod>2023-12-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
