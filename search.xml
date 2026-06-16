@@ -176,9 +176,9 @@
       
         <tags>
             
-            <tag> Rocky Linux </tag>
-            
             <tag> Docker </tag>
+            
+            <tag> Rocky Linux </tag>
             
         </tags>
       
@@ -386,9 +386,9 @@
             
             <tag> Docker </tag>
             
-            <tag> MariaDB </tag>
-            
             <tag> PHP </tag>
+            
+            <tag> MariaDB </tag>
             
             <tag> phpMyAdmin </tag>
             
@@ -417,9 +417,9 @@
       
         <tags>
             
-            <tag> Docker </tag>
-            
             <tag> Debian </tag>
+            
+            <tag> Docker </tag>
             
         </tags>
       
@@ -702,9 +702,9 @@
             
             <tag> CentOS </tag>
             
-            <tag> MariaDB </tag>
-            
             <tag> PHP </tag>
+            
+            <tag> MariaDB </tag>
             
             <tag> phpMyAdmin </tag>
             
@@ -735,15 +735,15 @@
             
             <tag> CentOS </tag>
             
-            <tag> WordPress </tag>
-            
-            <tag> Apache </tag>
+            <tag> PHP </tag>
             
             <tag> MariaDB </tag>
             
-            <tag> PHP </tag>
-            
             <tag> phpMyAdmin </tag>
+            
+            <tag> WordPress </tag>
+            
+            <tag> Apache </tag>
             
         </tags>
       
