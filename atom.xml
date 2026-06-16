@@ -197,9 +197,9 @@
     <category term="Archives" scheme="https://www.aikiki.top/categories/Archives/"/>
     
     
-    <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
-    
     <category term="Rocky Linux" scheme="https://www.aikiki.top/tags/Rocky-Linux/"/>
+    
+    <category term="Docker" scheme="https://www.aikiki.top/tags/Docker/"/>
     
   </entry>
   
