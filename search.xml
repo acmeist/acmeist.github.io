@@ -4,6 +4,112 @@
   
     
     <entry>
+      <title>Docker 使用宿主机网段</title>
+      <link href="/post/c3b4/"/>
+      <url>/post/c3b4/</url>
+      
+        <content type="html"><![CDATA[<p>Docker 使用宿主机网段多是使用 MacVlan 创建虚拟网络实现。<br>但本人在 RockyLinux 9.3 （ESXi 中运行的虚拟机）测试结果不尽人意。<br>主要问题是：<code>容器无法访问宿主机所在局域网网关和网段内的其它 IP 地址</code>。<br><em>(PS:后续查询资料，该问题是未开启 ESXi 的网卡混杂模式。另所查资料原文说 MacVlan 模式 1 个物理网卡仅支持 2 台虚拟机，超出 2 台后掉包严重，原因不明。该问题未再继续测试。)</em></p><p>最后改用了 Docker 新的 IpVlan 驱动方式解决问题。</p><blockquote><p>IpVlan 和 MacVlan 使用方法基本一致，个别参数有差别，但基本上用不到。</p></blockquote><h1 id="创建-IpVlan-网络"><a href="#创建-IpVlan-网络" class="headerlink" title="创建 IpVlan 网络"></a>创建 IpVlan 网络</h1><p>创建 IpVlan 网络：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker network create \</span><br><span class="line">-d ipvlan \</span><br><span class="line">--subnet=192.168.1.0/24 \</span><br><span class="line">--gateway=192.168.1.1 \</span><br><span class="line">--ipv6 \</span><br><span class="line">--subnet=fd00:db8:1:ddee::/64 \</span><br><span class="line">--gateway=fd00:db8:1:ddee::1 \</span><br><span class="line">-o ipvlan_mode=l2 \</span><br><span class="line">-o parent=ens192 \</span><br><span class="line">ipv6ipvlan</span><br></pre></td></tr></table></figure><blockquote><p>参数说明：</p><ul><li>-d：创建网络的驱动方式为 ipvlan。</li><li>–subnet&#x3D;192.168.8.0&#x2F;24：ipv4 的网段为 192.168.1.0&#x2F;24（宿主机所在网段）。</li><li>–gateway&#x3D;192.168.1.1：ipv4 的网关为 192.168.1.1（宿主机网关）。</li><li>–ipv6：启用 ipv6。</li><li>–subnet&#x3D;fd00:db8:1:ddee::&#x2F;64：ipv6 的网段为 fd00:db8:1:ddee::&#x2F;64。</li><li>–gateway&#x3D;fd00:db8:1:ddee::1：ipv6 的网关为 gateway&#x3D;fd00:db8:1:ddee::1</li><li>-o ipvlan_mode&#x3D;l2：ipvlan 工作模式为 l2（默认就是 l2，可省略该参数）。</li><li>-o parent&#x3D;ens192：指定要使用的父接口（网卡名称）。</li><li>ipv6ipvlan：要创建的 Docker 网络名称。</li></ul></blockquote><h1 id="测试-IpVlan-网络"><a href="#测试-IpVlan-网络" class="headerlink" title="测试 IpVlan 网络"></a>测试 IpVlan 网络</h1><blockquote><p>ipvlan 使用了宿主机子网网段，建议在容器中指定 ip 地址。</p></blockquote><p>使用 centos 镜像测试：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 CentOS 镜像</span></span><br><span class="line">docker run --net=ipv6ipvlan --ip=192.168.1.10 --dns=192.168.1.1 --name=centos -itd centos /bin/bash</span><br><span class="line"><span class="comment"># 进入容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it centos /bin/bash</span><br><span class="line"><span class="comment"># ping 网关测试</span></span><br><span class="line">ping 192.168.1.1</span><br><span class="line"><span class="comment"># ping 其它子网测试</span></span><br><span class="line">ping 192.168.1.X</span><br><span class="line"><span class="comment"># ping 外网测试</span></span><br><span class="line">ping www.baidu.com</span><br><span class="line"><span class="comment"># 退出容器</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure><p>正常情况下，容器已经能 ping 通各个地址。<br>此时，在其它网络设备也能 ping 通测试容器的 ip 地址 <code>192.168.1.10</code>。</p><blockquote><p>注意：宿主机和容器之间不能 ping 通。</p></blockquote><h1 id="打通宿主机和容器之间的互访"><a href="#打通宿主机和容器之间的互访" class="headerlink" title="打通宿主机和容器之间的互访"></a>打通宿主机和容器之间的互访</h1><p>创建虚拟接口桥接到物理网卡打通宿主机和容器之间互访。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加一个虚拟接口桥接到物理网卡</span></span><br><span class="line">ip <span class="built_in">link</span> add ipvlan-proxy <span class="built_in">link</span> ens192 <span class="built_in">type</span> ipvlan</span><br><span class="line"><span class="comment"># 给虚拟接口配置ip</span></span><br><span class="line">ip addr add 192.168.1.11/32 dev ipvlan-proxy</span><br><span class="line"><span class="comment"># 启用虚拟接口</span></span><br><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> ipvlan-proxy up</span><br><span class="line"><span class="comment"># 添加需要访问的容器网络的静态路由规则</span></span><br><span class="line">ip route add 192.168.1.10/32 dev ipvlan-proxy</span><br></pre></td></tr></table></figure><blockquote><p>参数说明：</p><ul><li>ipvlan-proxy：虚拟接口名称。</li><li>ens192：物理网卡名称。</li><li>192.168.1.11&#x2F;32：给虚拟接口分配的 ip 地址。</li><li>192.168.1.10&#x2F;32：需互访的容器 ip 地址。</li></ul></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Archives </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Docker </tag>
+            
+            <tag> IpVlan </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ESXi 远程 SSH 终端登录显示器管理界面</title>
+      <link href="/post/1e36/"/>
+      <url>/post/1e36/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>ESXi 主机通常不接显示器、键盘和鼠标，有时候需要登录显示器管理界面很不方便。<br>ESXi 提供了远程 SSH 终端登录此管理界面的功能，即是指令 <code>dcui</code>。</p></blockquote><h1 id="开启-SSH"><a href="#开启-SSH" class="headerlink" title="开启 SSH"></a>开启 SSH</h1><p>在<code>主机</code>-<code>操作</code>-<code>服务</code>-<code>启用 Secure Shell (SSH)</code>。</p><h1 id="登录-SSH-终端"><a href="#登录-SSH-终端" class="headerlink" title="登录 SSH 终端"></a>登录 SSH 终端</h1><p>使用你喜欢的 SSH 软件登录 ESXi。</p><h1 id="登录显示器管理界面"><a href="#登录显示器管理界面" class="headerlink" title="登录显示器管理界面"></a>登录显示器管理界面</h1><p>在 SSH 终端输入以下代码进入显示器管理界面：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TERM=xterm</span><br><span class="line">dcui</span><br></pre></td></tr></table></figure><p><em>ps：TERM 为终端环境变量。可以不设置此变量，直接输入 <code>dcui</code> 进入显示器管理界面。</em></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Archives </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ESXi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ESXi 6.7 自动关机设置</title>
+      <link href="/post/9973/"/>
+      <url>/post/9973/</url>
+      
+        <content type="html"><![CDATA[<h1 id="开启-SSH"><a href="#开启-SSH" class="headerlink" title="开启 SSH"></a>开启 SSH</h1><p>在<code>主机</code>-<code>操作</code>-<code>服务</code>-<code>启用 Secure Shell (SSH)</code>。</p><h1 id="登录-SSH-终端"><a href="#登录-SSH-终端" class="headerlink" title="登录 SSH 终端"></a>登录 SSH 终端</h1><p>使用你喜欢的 SSH 软件登录 ESXi。</p><h1 id="编写关机脚本文件"><a href="#编写关机脚本文件" class="headerlink" title="编写关机脚本文件"></a>编写关机脚本文件</h1><h2 id="进入存储空间目录"><a href="#进入存储空间目录" class="headerlink" title="进入存储空间目录"></a>进入存储空间目录</h2><blockquote><p>关机脚本文件需放到存储目录中，否则 ESXi 重启会丢失配置的文件。</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /vmfs/volumes/datastore1</span><br></pre></td></tr></table></figure><h2 id="编辑关机脚本文件"><a href="#编辑关机脚本文件" class="headerlink" title="编辑关机脚本文件"></a>编辑关机脚本文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> script  <span class="comment"># 创建脚本文件存放目录</span></span><br><span class="line"><span class="built_in">cd</span> script</span><br><span class="line">vi poweroff.sh</span><br></pre></td></tr></table></figure><p>在编辑框输入以下内容并保存退出：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#shutdown all VMs(2,3,9 is VMID,add your VMIDs here)</span></span><br><span class="line"><span class="comment">#vim-cmd vmsvc/power.shutdown 1</span></span><br><span class="line"><span class="comment">#vim-cmd vmsvc/power.off 1</span></span><br><span class="line"><span class="comment">#vim-cmd vmsvc/power.shutdown 2</span></span><br><span class="line"><span class="comment">#vim-cmd vmsvc/power.off 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Poweroff Host</span></span><br><span class="line">/sbin/poweroff</span><br></pre></td></tr></table></figure><blockquote><p>前面注释的代码用于关闭虚拟机。<br>我在各个虚拟机中配置了自动关机，因此注释。</p></blockquote><p>设置脚本权限为 755:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 755 poweroff.sh</span><br></pre></td></tr></table></figure><p><em>ps：上述命令中，7 代表文件拥有者的权限，5 分别代表组用户和其他用户的权限；755 即是 owner-read-write-execute，group-read-execute，others-read-execute，即执行者可读、写、执行文件权限，同组用户可读、可执行，其他用户可读、可执行。Linux 755 权限通过权限限制，使普通用户无法访问、修改、删除系统核心文件，并确保特定用户可以访问特定文件，确保服务器的安全性。此外，在用户登录系统时，也可以设置 755 的权限，以便只允许特定人员登录服务器，减少外来攻击的可能性。</em></p><h1 id="增加启动项目"><a href="#增加启动项目" class="headerlink" title="增加启动项目"></a>增加启动项目</h1><p>打开自启动文件：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/rc.local.d/local.sh</span><br></pre></td></tr></table></figure><p>在文件末尾的 <code>exit 0</code> 前面增加自动关机计划任务，编辑后的文件如下所示：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># local configuration options</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># file: /etc/rc.local.d/local.sh</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Note: modify at your own risk!  If you do/use anything in this</span></span><br><span class="line"><span class="comment"># script that is not part of a stable API (relying on files to be in</span></span><br><span class="line"><span class="comment"># specific places, specific tools, specific output, etc) there is a</span></span><br><span class="line"><span class="comment"># possibility you will end up with a broken system after patching or</span></span><br><span class="line"><span class="comment"># upgrading.  Changes are not supported unless under direction of</span></span><br><span class="line"><span class="comment"># VMware support.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Note: This script will not be run when UEFI secure boot is enabled.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制中国时区文件</span></span><br><span class="line"><span class="built_in">cp</span> -f /vmfs/volumes/datastore1/script/Shanghai /etc/localtime</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加自动关机计划任务</span></span><br><span class="line">/bin/kill $(<span class="built_in">cat</span> /var/run/crond.pid)</span><br><span class="line"><span class="comment"># crontabs format: min hour day mon dow command</span></span><br><span class="line">/bin/echo <span class="string">&#x27;0 1 * * * /vmfs/volumes/datastore1/script/poweroff.sh&#x27;</span> &gt;&gt; /var/spool/cron/crontabs/root</span><br><span class="line">/usr/lib/vmware/busybox/bin/busybox crond</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure><blockquote><ul><li>自动关机脚本是为了在 ESXi 启动后将 cron 设定的信息写入到 crontab 的配置文件中，并重启 cron 进程。</li><li>复制中国时区文件(此文件可以从其它 Linux 系统中复制)是为了解决 ESXi 时区问题。如果不复制该文件 ESXi 使用的是 UTC 时间，设定计划任务的时间需要减去 8 小时才是 UTC 时间。例如：23:00 的计划任务需为 “0 15 * * *”。</li></ul></blockquote><h1 id="备份启动脚本"><a href="#备份启动脚本" class="headerlink" title="备份启动脚本"></a>备份启动脚本</h1><blockquote><p>前面已经提到 ESXi 重启会重置系统，因此需要备份启动脚本。</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> auto-backup.sh</span><br></pre></td></tr></table></figure><p><em>ps：该脚本系统自带，直接执行接口。</em></p><h1 id="配置立即生效"><a href="#配置立即生效" class="headerlink" title="配置立即生效"></a>配置立即生效</h1><p>执行编辑好的启动脚本文件即可。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/rc.local.d/local.sh</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Archives </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ESXi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>OpenWrt 安装自带 Tailscale 和 ZeroTier</title>
+      <link href="/post/bf0c/"/>
+      <url>/post/bf0c/</url>
+      
+        <content type="html"><![CDATA[<h1 id="官方网站"><a href="#官方网站" class="headerlink" title="官方网站"></a>官方网站</h1><ul><li><a href="https://openwrt.ai/">OpenWrt 软路由固件下载与在线定制编译</a></li><li><a href="https://tailscale.com/">Tailscale · Best VPN Service for Secure Networks</a></li><li><a href="https://www.zerotier.com/">ZeroTier | Global Area Networking</a></li></ul><blockquote><p>OpenWrt 的安装、Tailscale 和 ZeroTier 使用方法参见网上教程。</p></blockquote><h1 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h1><p>既然是安装系统自带包，使用 OpenWrt 的软件包功能安装即可。<br>安装前先<code>更新列表...</code>。</p><h2 id="安装-Tailscale"><a href="#安装-Tailscale" class="headerlink" title="安装 Tailscale"></a>安装 Tailscale</h2><ul><li>OpenWrt 22.03.x 以上版本需要安装包 <code>iptables-nft</code>，直接搜索该名称安装。</li><li>tailscale 搜索名称安装即可，系统会安装 <code>tailscale</code> 和 <code>tailscaled</code>。</li><li>安装完成后一定要重启。</li></ul><p>卸载后的<code>清理</code>，推荐使用卸载脚本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --tries=5 -c -t 60 -O- https://gh.api.99988866.xyz/https://raw.githubusercontent.com/CH3NGYZ/tailscale-openwrt/chinese_mainland/uninstall.sh | sh</span><br></pre></td></tr></table></figure><p><em>ps：此脚本来源于 tailscale 的另外一种安装方法：</em><br><a href="https://github.com/CH3NGYZ/tailscale-openwrt">CH3NGYZ&#x2F;tailscale-openwrt: 在 openwrt 上最简单的 tailscale 部署方法 (github.com)</a></p><h2 id="安装-ZeroTier"><a href="#安装-ZeroTier" class="headerlink" title="安装 ZeroTier"></a>安装 ZeroTier</h2><p>OpenWrt 自带的 zerotier 提供了配置界面，搜索 <code>luci-app-zerotier</code> 安装即可，系统会自动安装 <code>luci-app-zerotier</code> 和 <code>zerotier</code>。<br>ZeroTier 安装完成后再页面菜单中出现 <code>VPN-ZeroTier</code> 选项。</p><h1 id="设置防火墙"><a href="#设置防火墙" class="headerlink" title="设置防火墙"></a>设置防火墙</h1><p>Tailscale 和 ZeroTier 设置防火墙的方法是一样的，这里以 Tailscale 为例。</p><h2 id="添加新接口"><a href="#添加新接口" class="headerlink" title="添加新接口"></a>添加新接口</h2><p>打开<code>网络-接口</code>菜单，点击页面下方的<code>添加新接口...</code>。<br>输入接口名称和选择设备，完成后点击<code>创建接口</code>。</p><p><img src="https://gitee.com/acmeist/img/raw/master/hexo/2023/11/202311211045958.png" alt="添加新接口"></p><blockquote><ul><li>Tailscale 设备名称是：tailscale0。</li><li>ZeroTier 设备名称以 <code>zt</code> 开头，后面是加入网络产生的代码编号。例如：ztfp6baqxy。</li><li>设备名称后面的 <code>(tailscale)</code> 表示该设备已被名称为 <code>tailscale</code> 的接口使用。</li></ul></blockquote><h2 id="设置防火墙-1"><a href="#设置防火墙-1" class="headerlink" title="设置防火墙"></a>设置防火墙</h2><h3 id="添加区域"><a href="#添加区域" class="headerlink" title="添加区域"></a>添加区域</h3><p>打开<code>网络-防火墙</code>菜单，在<code>常规设置</code>下方的<code>区域</code>点击<code>添加</code>。<br>按下图设置完成后，点击<code>保存</code>。</p><p><img src="https://gitee.com/acmeist/img/raw/master/hexo/2023/11/202311211101580.png" alt="添加区域"></p><h3 id="设置转发规则"><a href="#设置转发规则" class="headerlink" title="设置转发规则"></a>设置转发规则</h3><p>打开<code>网络-防火墙</code>菜单，在<code>自定义规则</code>下方输入以下规则。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -I FORWARD -i tailscale0 -j ACCEPT</span><br><span class="line">iptables -I FORWARD -o tailscale0 -j ACCEPT</span><br><span class="line">iptables -t nat -I POSTROUTING -o tailscale0 -j MASQUERADE</span><br></pre></td></tr></table></figure><p>输入完成后，点击<code>保存</code>。</p><blockquote><ul><li>规则中的 <code>tailscale0</code> 是设备名称，注意替换（<code>3</code>处）。</li><li>关于设备名称参见前文：<a href="./#%E6%B7%BB%E5%8A%A0%E6%96%B0%E6%8E%A5%E5%8F%A3">添加新接口</a>。</li></ul></blockquote><h2 id="重新启动"><a href="#重新启动" class="headerlink" title="重新启动"></a>重新启动</h2><blockquote><p>防火墙设置完成后建议重启设备，避免出现不可预料的问题。</p></blockquote><h1 id="加入到网络"><a href="#加入到网络" class="headerlink" title="加入到网络"></a>加入到网络</h1><h2 id="Tailscale"><a href="#Tailscale" class="headerlink" title="Tailscale"></a>Tailscale</h2><p>SSH 登录控制台，输入以下指令加入网络：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tailscale up --advertise-routes=192.168.1.0/24 --accept-routes=<span class="literal">true</span> --accept-dns=<span class="literal">false</span></span><br></pre></td></tr></table></figure><blockquote><ul><li><code>192.168.1.0/24</code> 是 OpenWrt 所在内网网段。此参数开启后，允许通过 <code>Tailscale</code> 访问该子网。</li><li>如果是多个网段，用逗号隔离即可。</li><li>更多设置登录管理端：<a href="https://tailscale.com/">Tailscale · Best VPN Service for Secure Networks</a></li></ul></blockquote><h2 id="ZeroTier"><a href="#ZeroTier" class="headerlink" title="ZeroTier"></a>ZeroTier</h2><p>打开 <code>VPN-ZeroTier</code> 页面，在下方输入要加入的 <code>网络 ID</code> 即可。<br>更多设置登录管理端：<a href="https://www.zerotier.com/">ZeroTier | Global Area Networking</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Archives </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> OpenWrt </tag>
+            
+            <tag> Tailscale </tag>
+            
+            <tag> ZeroTier </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>OpenWrt 更新所有已安装软件包</title>
       <link href="/post/53a7/"/>
       <url>/post/53a7/</url>
