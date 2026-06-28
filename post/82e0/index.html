@@ -1,0 +1,472 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>PBS 裸机部署 + PVE 完整增量备份教程 | AiKIKI</title><meta name="author" content="樵子"><meta name="copyright" content="樵子"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="referrer" content="no-referrer"><meta name="description" content="🛡️ PBS 裸机部署与 PVE 完整增量备份实战指南 本教程旨在指导您完成 Proxmox Backup Server (PBS) 的独立裸机配置 PVE 备份过程，包括：ZFS 存储池配置、权限管理以及与 Proxmox VE (PVE) 的无缝对接，实现高效、安全的增量备份。  📋 一、 前置准备与环境要求在开始配置前，请确保满足以下基础环境要求：  系统安装：PBS 已独立裸机安装，配">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PBS 裸机部署 + PVE 完整增量备份教程">
+<meta property="og:url" content="https://www.aikiki.top/post/82e0/index.html">
+<meta property="og:site_name" content="AiKIKI">
+<meta property="og:description" content="🛡️ PBS 裸机部署与 PVE 完整增量备份实战指南 本教程旨在指导您完成 Proxmox Backup Server (PBS) 的独立裸机配置 PVE 备份过程，包括：ZFS 存储池配置、权限管理以及与 Proxmox VE (PVE) 的无缝对接，实现高效、安全的增量备份。  📋 一、 前置准备与环境要求在开始配置前，请确保满足以下基础环境要求：  系统安装：PBS 已独立裸机安装，配">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/proxmox-logo.jfif">
+<meta property="article:published_time" content="2026-06-22T04:41:00.000Z">
+<meta property="article:modified_time" content="2026-06-22T08:55:14.000Z">
+<meta property="article:author" content="樵子">
+<meta property="article:tag" content="Proxmox">
+<meta property="article:tag" content="PBS">
+<meta property="article:tag" content="PVE">
+<meta property="article:tag" content="DataBackup">
+<meta property="article:tag" content="SysAdmin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/proxmox-logo.jfif"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/favicon.ico"><link rel="canonical" href="https://www.aikiki.top/post/82e0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'PBS 裸机部署 + PVE 完整增量备份教程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-22 16:55:14'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="AiKIKI" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/avatar.png" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/proxmox-logo.jfif')"><nav id="nav"><span id="blog-info"><a href="/" title="AiKIKI"><span class="site-name">AiKIKI</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">PBS 裸机部署 + PVE 完整增量备份教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-06-22T04:41:00.000Z" title="发表于 2026-06-22 12:41:00">2026-06-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-22T08:55:14.000Z" title="更新于 2026-06-22 16:55:14">2026-06-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Archives/">Archives</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="PBS 裸机部署 + PVE 完整增量备份教程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="🛡️-PBS-裸机部署与-PVE-完整增量备份实战指南"><a href="#🛡️-PBS-裸机部署与-PVE-完整增量备份实战指南" class="headerlink" title="🛡️ PBS 裸机部署与 PVE 完整增量备份实战指南"></a>🛡️ PBS 裸机部署与 PVE 完整增量备份实战指南</h1><blockquote>
+<p>本教程旨在指导您完成 Proxmox Backup Server (PBS) 的独立裸机配置 PVE 备份过程，包括：ZFS 存储池配置、权限管理以及与 Proxmox VE (PVE) 的无缝对接，实现高效、安全的增量备份。</p>
+</blockquote>
+<h2 id="📋-一、-前置准备与环境要求"><a href="#📋-一、-前置准备与环境要求" class="headerlink" title="📋 一、 前置准备与环境要求"></a>📋 一、 前置准备与环境要求</h2><p>在开始配置前，请确保满足以下基础环境要求：</p>
+<ol>
+<li><strong>系统安装</strong>：PBS 已独立裸机安装，配置了静态 IP，且能通过 <code>https://PBS_IP:8007</code> 正常访问 Web 管理页面。</li>
+<li><strong>磁盘规划</strong>：<strong>严禁混用磁盘</strong>。系统盘仅用于安装 PBS 系统，必须使用独立硬盘专门存放备份数据。</li>
+<li><strong>网络互通</strong>：PVE 节点与 PBS 必须在内网互通，防火墙需放行 TCP 8007 端口。</li>
+<li><strong>时间同步</strong>：两台设备的时区需统一（如上海），并确保 NTP 时间同步正常，避免备份校验失败。</li>
+</ol>
+<hr>
+<h2 id="💾-二、-PBS-存储池配置（ZFS-标准流程）"><a href="#💾-二、-PBS-存储池配置（ZFS-标准流程）" class="headerlink" title="💾 二、 PBS 存储池配置（ZFS 标准流程）"></a>💾 二、 PBS 存储池配置（ZFS 标准流程）</h2><p><strong>操作路径</strong>：PBS WebUI → <code>Administration</code> → <code>Disks</code></p>
+<ol>
+<li><p><strong>磁盘擦除</strong><br> 选中所有用于备份的专用硬盘，点击 <code>Wipe Disk</code>。</p>
+<ul>
+<li><strong>擦除模式</strong>：选择 <code>secure</code>，彻底清空磁盘原有分区表。</li>
+</ul>
+</li>
+<li><p><strong>创建 ZFS 存储池</strong><br> 顶部切换至 <code>ZFS</code> 标签页，点击 <code>Create ZFS</code>，参考以下参数配置：</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">参数项</th>
+<th align="left">推荐配置值</th>
+<th align="left">说明与建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Name</strong></td>
+<td align="left"><code>backup_pool</code></td>
+<td align="left">自定义 ZFS 存储池名称</td>
+</tr>
+<tr>
+<td align="left"><strong>RAID Level</strong></td>
+<td align="left">2盘: Mirror  <br>4盘+: RAIDZ2</td>
+<td align="left">Mirror 允许坏 1 块盘；RAIDZ2 允许同时坏 2 块盘</td>
+</tr>
+<tr>
+<td align="left"><strong>Compression</strong></td>
+<td align="left"><code>zstd</code></td>
+<td align="left">开启底层压缩，显著降低存储空间占用</td>
+</tr>
+<tr>
+<td align="left"><strong>ashift</strong></td>
+<td align="left"><code>12</code></td>
+<td align="left">兼容 4K 扇区机械硬盘及固态硬盘</td>
+</tr>
+<tr>
+<td align="left"><strong>Add Storage</strong></td>
+<td align="left">✅ <strong>勾选</strong></td>
+<td align="left"><strong>关键</strong>：自动生成合规 Datastore，防止数据误写入系统盘</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>注意</strong>：创建完成后，系统会自动生成同名备份仓库，<strong>无需</strong>手动新建 Datastore。</p>
+</blockquote>
+<hr>
+<h2 id="🕒-三、-仓库维护策略（Prune-GC）"><a href="#🕒-三、-仓库维护策略（Prune-GC）" class="headerlink" title="🕒 三、 仓库维护策略（Prune &amp; GC）"></a>🕒 三、 仓库维护策略（Prune &amp; GC）</h2><p><strong>操作路径</strong>：<code>Storage</code> → <code>Datastore</code> → <code>backup_pool</code> → <code>Edit</code> → <code>Prune &amp; GC</code></p>
+<blockquote>
+<p><strong>⚠️ 重要提示</strong>：PBS 定时调度<strong>不支持</strong> <code>daily</code> 或 <code>weekly</code> 关键字，仅支持标准 systemd 时间格式（如 <code>00:30</code> 或 <code>sun 03:00</code>）。</p>
+</blockquote>
+<ol>
+<li><strong>定时任务与保留策略配置</strong></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">参数项</th>
+<th align="left">填写内容</th>
+<th align="left">功能释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Prune Schedule</strong></td>
+<td align="left"><code>00:30</code></td>
+<td align="left">每日 00:30 执行快照精简，标记过期索引（不释放空间）</td>
+</tr>
+<tr>
+<td align="left"><strong>GC Schedule</strong></td>
+<td align="left"><code>sun 03:00</code></td>
+<td align="left">每周日 03:00 执行垃圾回收，清理孤立数据块（释放空间）</td>
+</tr>
+<tr>
+<td align="left"><strong>Keep Last</strong></td>
+<td align="left"><code>3</code></td>
+<td align="left">永久保留最新的 3 份备份作为兜底</td>
+</tr>
+<tr>
+<td align="left"><strong>Keep Daily</strong></td>
+<td align="left"><code>7</code></td>
+<td align="left">保留最近 7 天的每日备份</td>
+</tr>
+<tr>
+<td align="left"><strong>Keep Weekly</strong></td>
+<td align="left"><code>4</code></td>
+<td align="left">保留最近 4 周的周备份</td>
+</tr>
+<tr>
+<td align="left"><strong>Keep Monthly</strong></td>
+<td align="left"><code>3</code></td>
+<td align="left">保留最近 3 个月的月备份</td>
+</tr>
+<tr>
+<td align="left"><strong>Max Depth</strong></td>
+<td align="left"><code>Full</code></td>
+<td align="left">完整扫描所有快照，确保清理逻辑生效</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li><strong>标准执行时序逻辑</strong><br> 为避免数据堆积并满足官方 24 小时数据冷却保护机制，建议遵循以下时序：<ol>
+<li><strong>23:00</strong>：PVE 自动生成增量备份。</li>
+<li><strong>00:30</strong>：PBS 执行 Prune，标记超出保留策略的过期快照。</li>
+<li><strong>周日 03:00</strong>：执行 GC，因间隔超过 24 小时，可完整回收磁盘空间。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="🔐-四、-权限管理与安全对接"><a href="#🔐-四、-权限管理与安全对接" class="headerlink" title="🔐 四、 权限管理与安全对接"></a>🔐 四、 权限管理与安全对接</h2><ol>
+<li><p><strong>创建 PVE 专用账号</strong><br> <strong>操作路径</strong>：<code>Access Control</code> → <code>Users</code> → <code>Add User</code></p>
+<ul>
+<li><strong>Username</strong>: <code>pve_client</code></li>
+<li><strong>Realm</strong>: <code>pbs</code> (PBS 本地用户域)</li>
+<li><strong>Password</strong>: 设置高强度密码（大小写+数字+符号）</li>
+</ul>
+<p> <strong>分配仓库权限</strong>：</p>
+<ul>
+<li><strong>路径</strong>：<code>Permissions</code> → <code>Add Permission</code></li>
+<li><strong>Path</strong>: <code>/datastore/backup_pool</code></li>
+<li><strong>User</strong>: <code>pve_client@pbs</code></li>
+<li><strong>Role</strong>: <code>DatastorePowerUser</code></li>
+</ul>
+</li>
+<li><p><strong>配置 API Token（推荐用于免密对接）</strong></p>
+<blockquote>
+<p><strong>关键说明</strong>：API Token 属于独立身份，<strong>不继承</strong>用户权限。创建 Token 后必须单独分配仓库权限，否则鉴权会失败。</p>
+</blockquote>
+<p> <strong>创建 Token</strong>：</p>
+<ul>
+<li><strong>路径</strong>：<code>API Token</code> → <code>Add API Token</code></li>
+<li><strong>User</strong>: <code>pve_client@pbs</code></li>
+<li><strong>Token ID</strong>: <code>pve-token</code></li>
+<li><strong>Expire</strong>: <code>never</code></li>
+<li><strong>操作</strong>：创建后<strong>立即复制保存 Secret 密钥</strong>，页面仅展示一次，丢失无法找回。</li>
+</ul>
+<p> <strong>新增 Token 专属权限</strong>：</p>
+<ul>
+<li><strong>权限类型</strong>：切换为 <code>API Token Permission</code></li>
+<li><strong>Path</strong>: <code>/datastore/backup_pool</code></li>
+<li><strong>API Token</strong>: <code>pve_client@pbs!pve-token</code></li>
+<li><strong>Role</strong>: <code>DatastorePowerUser</code></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="🌐-五、-网络与证书配置"><a href="#🌐-五、-网络与证书配置" class="headerlink" title="🌐 五、 网络与证书配置"></a>🌐 五、 网络与证书配置</h2><ol>
+<li><strong>防火墙放行</strong><br> <strong>操作路径</strong>：<code>Administration</code> → <code>Firewall</code> → <code>Add Rule</code></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">配置值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Action</strong></td>
+<td align="left">Accept</td>
+<td align="left">允许流量</td>
+</tr>
+<tr>
+<td align="left"><strong>Source</strong></td>
+<td align="left"><code>192.168.1.0/24</code></td>
+<td align="left">替换为实际的 PVE 内网网段</td>
+</tr>
+<tr>
+<td align="left"><strong>Port</strong></td>
+<td align="left"><code>8007</code></td>
+<td align="left">PBS 服务端口</td>
+</tr>
+</tbody></table>
+<p><strong>终端一键命令</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxmox-backup-manager firewall add allow <span class="built_in">source</span> 192.168.1.0/24 port 8007</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p><strong>获取证书指纹</strong><br> 登录 PBS 终端执行以下命令，复制 <code>Fingerprint (sha256)</code> 后的完整字符串备用：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxmox-backup-manager cert info</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h2 id="🔗-六、-PVE-端对接配置"><a href="#🔗-六、-PVE-端对接配置" class="headerlink" title="🔗 六、 PVE 端对接配置"></a>🔗 六、 PVE 端对接配置</h2><p><strong>操作路径</strong>：PVE WebUI → <code>数据中心</code> → <code>存储</code> → <code>添加</code> → <code>Proxmox Backup Server</code></p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">配置说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>ID</strong></td>
+<td align="left"><code>PBS-Backup</code> (自定义标识)</td>
+</tr>
+<tr>
+<td align="left"><strong>Server</strong></td>
+<td align="left">PBS 的静态内网 IP</td>
+</tr>
+<tr>
+<td align="left"><strong>Port</strong></td>
+<td align="left"><code>8007</code></td>
+</tr>
+<tr>
+<td align="left"><strong>Username</strong></td>
+<td align="left">二选一：  <br>1. 密码登录：<code>pve_client@pbs</code>  <br>2. Token 登录：<code>pve_client@pbs!pve-token</code></td>
+</tr>
+<tr>
+<td align="left"><strong>Password&#x2F;Secret</strong></td>
+<td align="left">填写对应的用户密码或 Token 密钥</td>
+</tr>
+<tr>
+<td align="left"><strong>Fingerprint</strong></td>
+<td align="left">粘贴第五步获取的 SHA256 证书指纹</td>
+</tr>
+<tr>
+<td align="left"><strong>Datastore</strong></td>
+<td align="left">下拉选择 <code>backup_pool</code></td>
+</tr>
+<tr>
+<td align="left"><strong>Encryption</strong></td>
+<td align="left">勾选自动生成密钥，<strong>务必下载 .key 文件离线保存</strong></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>提示</strong>：添加无报错即表示对接成功。PBS 采用永久块级增量备份，任意快照均可独立完整恢复，无备份链依赖。</p>
+</blockquote>
+<hr>
+<h2 id="🤖-七、-自动化备份任务"><a href="#🤖-七、-自动化备份任务" class="headerlink" title="🤖 七、 自动化备份任务"></a>🤖 七、 自动化备份任务</h2><p><strong>操作路径</strong>：PVE WebUI → <code>数据中心</code> → <code>备份</code> → <code>添加</code></p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">配置值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>存储</strong></td>
+<td align="left"><code>PBS-Backup</code></td>
+<td align="left">选用已对接的 PBS 存储</td>
+</tr>
+<tr>
+<td align="left"><strong>计划</strong></td>
+<td align="left"><code>daily 23:00</code></td>
+<td align="left">PVE 支持 daily 关键字，每日 23 点自动增量备份</td>
+</tr>
+<tr>
+<td align="left"><strong>模式</strong></td>
+<td align="left"><code>快照</code></td>
+<td align="left">在线热备份，虚拟机无需关机</td>
+</tr>
+<tr>
+<td align="left"><strong>压缩</strong></td>
+<td align="left"><code>zstd</code></td>
+<td align="left">高效压缩，降低传输流量与磁盘占用</td>
+</tr>
+<tr>
+<td align="left"><strong>选项</strong></td>
+<td align="left">✅ 跳过已停机磁盘</td>
+<td align="left">跳过空磁盘，缩短备份耗时</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🛠️-八、-运维与故障排查"><a href="#🛠️-八、-运维与故障排查" class="headerlink" title="🛠️ 八、 运维与故障排查"></a>🛠️ 八、 运维与故障排查</h2><ol>
+<li><p><strong>常用运维命令</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看仓库状态（去重率、实际占用、待删除数据）</span></span><br><span class="line">proxmox-backup-manager datastore status backup_pool</span><br><span class="line"></span><br><span class="line"><span class="comment"># 手动执行垃圾回收（释放磁盘空间）</span></span><br><span class="line">proxmox-backup-client garbage-collect backup_pool</span><br><span class="line"></span><br><span class="line"><span class="comment"># 手动执行快照精简</span></span><br><span class="line">proxmox-backup-manager prune run backup_pool</span><br><span class="line"></span><br><span class="line"><span class="comment"># 校验定时调度语法（排查 400 错误）</span></span><br><span class="line">systemd-analyze calendar <span class="string">&quot;sun 03:00&quot;</span></span><br><span class="line">systemd-analyze calendar <span class="string">&quot;00:30&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>高频问题解决方案 (FAQ)</strong></p>
+<ol>
+<li><strong>GC&#x2F;Prune 调度报错 400</strong><ul>
+<li><strong>原因</strong>：填写了 <code>daily</code> 或 <code>weekly</code>。</li>
+<li><strong>解决</strong>：PBS 仅允许纯时分（如 <code>00:30</code>）或星期+时分（如 <code>sun 03:00</code>）格式。</li>
+</ul>
+</li>
+<li><strong>API Token 连接提示权限拒绝</strong><ul>
+<li><strong>原因</strong>：Token 是独立身份，仅给用户分配权限无效。</li>
+<li><strong>解决</strong>：必须在权限管理中单独添加 API Token 的专属权限。</li>
+</ul>
+</li>
+<li><strong>GC 执行后显示大量“待处理数据”</strong><ul>
+<li><strong>原因</strong>：触发了官方 24 小时数据冷却保护机制。</li>
+<li><strong>解决</strong>：将 GC 设置为每周凌晨执行（间隔 &gt;24h），即可完整清理。</li>
+</ul>
+</li>
+<li><strong>手动新建 Datastore 指向 ZFS 根目录</strong><ul>
+<li><strong>后果</strong>：导致备份数据写入系统盘，极易爆满宕机。</li>
+<li><strong>解决</strong>：严禁此操作，务必在创建 ZFS 时勾选 “Add Storage”。</li>
+</ul>
+</li>
+<li><strong>删除备份后磁盘空间未释放</strong><ul>
+<li><strong>原因</strong>：Prune 仅标记删除，需执行 GC 才能物理删除数据块。</li>
+<li><strong>解决</strong>：等待 GC 自动执行或手动触发 GC。</li>
+</ul>
+</li>
+<li><strong>Contents 列表不显示单份备份大小</strong><ul>
+<li><strong>原因</strong>：PBS 底层为全局块级去重，多快照共享数据块，无法拆分单份大小。</li>
+<li><strong>解决</strong>：仅能在 Summary 查看仓库总容量。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://www.aikiki.top">樵子</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://www.aikiki.top/post/82e0/">https://www.aikiki.top/post/82e0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.aikiki.top" target="_blank">AiKIKI</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Proxmox/">Proxmox</a><a class="post-meta__tags" href="/tags/PBS/">PBS</a><a class="post-meta__tags" href="/tags/PVE/">PVE</a><a class="post-meta__tags" href="/tags/DataBackup/">DataBackup</a><a class="post-meta__tags" href="/tags/SysAdmin/">SysAdmin</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/proxmox-logo.jfif" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/jymhB7jhsLZtl_n8ev4-nw/" title="自建 Tailscale 控制服务器：Headscale + Headplane 部署完整指南"><img class="cover" src="https://img.aikiki.top:5001/hexo/headscale.png" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">自建 Tailscale 控制服务器：Headscale + Headplane 部署完整指南</div></div></a></div><div class="next-post pull-right"><a href="/post/ce7a/" title="Gitea + Webhook 自动部署完整教程"><img class="cover" src="https://img.aikiki.top:5001/hexo/gitea-webhook-auto-deploy-cover.jpg" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Gitea + Webhook 自动部署完整教程</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/avatar.png" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">樵子</div><div class="author-info__description">Always CREATIVE.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/acmeist"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/acmeist" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:huweighost@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="Rss"><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">感謝訪問本站，若喜歡請收藏 ^_^</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%9B%A1%EF%B8%8F-PBS-%E8%A3%B8%E6%9C%BA%E9%83%A8%E7%BD%B2%E4%B8%8E-PVE-%E5%AE%8C%E6%95%B4%E5%A2%9E%E9%87%8F%E5%A4%87%E4%BB%BD%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97"><span class="toc-number">1.</span> <span class="toc-text">🛡️ PBS 裸机部署与 PVE 完整增量备份实战指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-%E4%B8%80%E3%80%81-%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87%E4%B8%8E%E7%8E%AF%E5%A2%83%E8%A6%81%E6%B1%82"><span class="toc-number">1.1.</span> <span class="toc-text">📋 一、 前置准备与环境要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%BE-%E4%BA%8C%E3%80%81-PBS-%E5%AD%98%E5%82%A8%E6%B1%A0%E9%85%8D%E7%BD%AE%EF%BC%88ZFS-%E6%A0%87%E5%87%86%E6%B5%81%E7%A8%8B%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">💾 二、 PBS 存储池配置（ZFS 标准流程）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%95%92-%E4%B8%89%E3%80%81-%E4%BB%93%E5%BA%93%E7%BB%B4%E6%8A%A4%E7%AD%96%E7%95%A5%EF%BC%88Prune-GC%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">🕒 三、 仓库维护策略（Prune &amp; GC）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%90-%E5%9B%9B%E3%80%81-%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B8%8E%E5%AE%89%E5%85%A8%E5%AF%B9%E6%8E%A5"><span class="toc-number">1.4.</span> <span class="toc-text">🔐 四、 权限管理与安全对接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%90-%E4%BA%94%E3%80%81-%E7%BD%91%E7%BB%9C%E4%B8%8E%E8%AF%81%E4%B9%A6%E9%85%8D%E7%BD%AE"><span class="toc-number">1.5.</span> <span class="toc-text">🌐 五、 网络与证书配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%97-%E5%85%AD%E3%80%81-PVE-%E7%AB%AF%E5%AF%B9%E6%8E%A5%E9%85%8D%E7%BD%AE"><span class="toc-number">1.6.</span> <span class="toc-text">🔗 六、 PVE 端对接配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A4%96-%E4%B8%83%E3%80%81-%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%87%E4%BB%BD%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.7.</span> <span class="toc-text">🤖 七、 自动化备份任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E5%85%AB%E3%80%81-%E8%BF%90%E7%BB%B4%E4%B8%8E%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5"><span class="toc-number">1.8.</span> <span class="toc-text">🛠️ 八、 运维与故障排查</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/u954rtSjNWJBjEPmO5-ihQ/" title="DDNS-GO 状态监控完整部署教程（Webhook + Caddy 静态服务版）"><img src="https://img.aikiki.top:5001/hexo/ddns-go.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="DDNS-GO 状态监控完整部署教程（Webhook + Caddy 静态服务版）"/></a><div class="content"><a class="title" href="/post/u954rtSjNWJBjEPmO5-ihQ/" title="DDNS-GO 状态监控完整部署教程（Webhook + Caddy 静态服务版）">DDNS-GO 状态监控完整部署教程（Webhook + Caddy 静态服务版）</a><time datetime="2026-06-28T07:59:00.000Z" title="发表于 2026-06-28 15:59:00">2026-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/IY4VcEZ0ymcXFsGuAwvWIQ/" title="新设备接入自建 Headscale 服务器操作指南"><img src="https://img.aikiki.top:5001/hexo/headscale.png" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="新设备接入自建 Headscale 服务器操作指南"/></a><div class="content"><a class="title" href="/post/IY4VcEZ0ymcXFsGuAwvWIQ/" title="新设备接入自建 Headscale 服务器操作指南">新设备接入自建 Headscale 服务器操作指南</a><time datetime="2026-06-28T07:58:00.000Z" title="发表于 2026-06-28 15:58:00">2026-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/jymhB7jhsLZtl_n8ev4-nw/" title="自建 Tailscale 控制服务器：Headscale + Headplane 部署完整指南"><img src="https://img.aikiki.top:5001/hexo/headscale.png" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="自建 Tailscale 控制服务器：Headscale + Headplane 部署完整指南"/></a><div class="content"><a class="title" href="/post/jymhB7jhsLZtl_n8ev4-nw/" title="自建 Tailscale 控制服务器：Headscale + Headplane 部署完整指南">自建 Tailscale 控制服务器：Headscale + Headplane 部署完整指南</a><time datetime="2026-06-28T07:39:00.000Z" title="发表于 2026-06-28 15:39:00">2026-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/82e0/" title="PBS 裸机部署 + PVE 完整增量备份教程"><img src="https://cdn.jsdelivr.net/gh/acmeist/CDN/logos/proxmox-logo.jfif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="PBS 裸机部署 + PVE 完整增量备份教程"/></a><div class="content"><a class="title" href="/post/82e0/" title="PBS 裸机部署 + PVE 完整增量备份教程">PBS 裸机部署 + PVE 完整增量备份教程</a><time datetime="2026-06-22T04:41:00.000Z" title="发表于 2026-06-22 12:41:00">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/ce7a/" title="Gitea + Webhook 自动部署完整教程"><img src="https://img.aikiki.top:5001/hexo/gitea-webhook-auto-deploy-cover.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/404.jpg'" alt="Gitea + Webhook 自动部署完整教程"/></a><div class="content"><a class="title" href="/post/ce7a/" title="Gitea + Webhook 自动部署完整教程">Gitea + Webhook 自动部署完整教程</a><time datetime="2026-06-17T02:43:00.000Z" title="发表于 2026-06-17 10:43:00">2026-06-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By 樵子</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img class="icp-icon" src="https://cdn.jsdelivr.net/gh/acmeist/CDN/www/img/icp.png"><span>渝ICP备19007019号</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
