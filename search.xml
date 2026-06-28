@@ -504,9 +504,9 @@
       
         <tags>
             
-            <tag> PHP </tag>
-            
             <tag> Docker </tag>
+            
+            <tag> PHP </tag>
             
         </tags>
       
@@ -531,6 +531,8 @@
       
         <tags>
             
+            <tag> Docker </tag>
+            
             <tag> MariaDB </tag>
             
             <tag> PHP </tag>
@@ -538,8 +540,6 @@
             <tag> phpMyAdmin </tag>
             
             <tag> Nginx </tag>
-            
-            <tag> Docker </tag>
             
         </tags>
       
